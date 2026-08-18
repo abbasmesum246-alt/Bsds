@@ -16,6 +16,8 @@ export async function GET() {
   }
   return NextResponse.json({ seeded: false, ...count(db) });
 }
+// Ensure demo data exists before any dashboard API call (runs on cold start).
+export const dynamic = "force-dynamic";
 function count(db: ReturnType<typeof readDB>) {
   return {
     counts: {

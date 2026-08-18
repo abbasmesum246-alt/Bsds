@@ -1,35 +1,58 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
+import { buildSeed } from "@/scripts/seed-data";
 import type { DBShape } from "./types";
 
+// Primary location (persists when running on your own computer).
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
-
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
+// Fallback location for read-only hosting (e.g. Vercel's serverless).
+const TMP_FILE = path.join(os.tmpdir(), "bsds-db.json");
 
 const EMPTY: DBShape = {
   users: [], stores: [], suppliers: [], products: [],
   orders: [], rules: [], activities: [], sessions: {},
 };
 
-export function readDB(): DBShape {
-  ensureDir();
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(EMPTY, null, 2));
-    return structuredClone(EMPTY);
-  }
+// In-memory mirror so the app keeps working even on read-only filesystems.
+let memoryDB: DBShape = structuredClone(EMPTY);
+
+function resolveFile(): string {
   try {
-    return { ...structuredClone(EMPTY), ...JSON.parse(fs.readFileSync(DB_FILE, "utf-8")) };
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.accessSync(DATA_DIR, fs.constants.W_OK);
+    return DB_FILE;
   } catch {
-    return structuredClone(EMPTY);
+    return TMP_FILE;
   }
 }
 
+export function readDB(): DBShape {
+  const file = resolveFile();
+  try {
+    if (fs.existsSync(file)) {
+      const parsed = JSON.parse(fs.readFileSync(file, "utf-8"));
+      memoryDB = { ...structuredClone(EMPTY), ...parsed };
+      return memoryDB;
+    }
+  } catch {
+    /* fall through */
+  }
+  if (memoryDB && memoryDB.users.length > 0) return memoryDB;
+  // First run (e.g. on Vercel): seed with demo data so the app is alive.
+  memoryDB = buildSeed();
+  try { writeDB(memoryDB); } catch { /* read-only FS is fine */ }
+  return memoryDB;
+}
+
 export function writeDB(db: DBShape) {
-  ensureDir();
-  fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+  memoryDB = db;
+  try {
+    fs.writeFileSync(resolveFile(), JSON.stringify(db, null, 2));
+  } catch {
+    // Keep in-memory copy if filesystem is read-only.
+  }
 }
 
 export function mutate<T>(fn: (db: DBShape) => T): T {
