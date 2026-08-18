@@ -64,10 +64,11 @@ export async function GET() {
   const refundRate = orders.length ? (returned.length / orders.length) * 100 : 0;
   const fulfillmentRate = orders.length ? (paid.filter((o) => o.fulfillment === "delivered" || o.fulfillment === "shipped").length / orders.length) * 100 : 0;
 
-  // Break-even: how many sales cover fixed costs ($99/month plan + $30 tools)
+  // Break-even: how many sales cover fixed costs ($99/mo plan + tools),
+  // using GROSS profit per order (the money left after product cost).
   const monthlyFixed = 129;
-  const profitPerOrder = orderCount ? netProfit / orderCount : 0;
-  const breakEvenOrders = profitPerOrder > 0 ? Math.ceil(monthlyFixed / profitPerOrder) : 0;
+  const grossPerOrder = orderCount ? grossProfit / orderCount : 0;
+  const breakEvenOrders = grossPerOrder > 0 ? Math.ceil(monthlyFixed / grossPerOrder) : 0;
 
   // Product-level profit insights
   const productStats = products.map((p) => {
