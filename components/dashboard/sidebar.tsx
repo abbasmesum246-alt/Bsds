@@ -2,12 +2,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3 } from "lucide-react";
 
 const nav = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Products", href: "/dashboard/products", icon: Package },
   { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
+  { label: "Finance", href: "/dashboard/finance", icon: BarChart3 },
   { label: "Stores", href: "/dashboard/stores", icon: Store },
   { label: "Suppliers", href: "/dashboard/suppliers", icon: Truck },
   { label: "Automations", href: "/dashboard/automations", icon: Workflow },
