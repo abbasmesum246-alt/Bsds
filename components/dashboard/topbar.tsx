@@ -27,7 +27,7 @@ export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
   }
 
   return (
-    <header className="sticky top-0 z-20 h-16 bg-white/80 backdrop-blur border-b border-ink-100">
+    <header className="sticky top-0 z-20 h-16 glass border-b border-white/60">
       <div className="h-full px-4 sm:px-6 flex items-center gap-3">
         <button onClick={onMenuClick} className="lg:hidden p-2 -ml-2 rounded-lg text-ink-600 hover:bg-ink-100" aria-label="Open menu"><Menu className="h-5 w-5" /></button>
         <div className="relative flex-1 max-w-xl hidden sm:block">

@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator } from "lucide-react";
 
 const nav = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Products", href: "/dashboard/products", icon: Package },
   { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { label: "Finance", href: "/dashboard/finance", icon: BarChart3 },
+  { label: "Calculator", href: "/dashboard/calculator", icon: Calculator },
   { label: "Stores", href: "/dashboard/stores", icon: Store },
   { label: "Suppliers", href: "/dashboard/suppliers", icon: Truck },
   { label: "Automations", href: "/dashboard/automations", icon: Workflow },
@@ -23,10 +24,10 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
   const isActive = (href: string) => (href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href));
 
   const content = (
-    <div className="flex h-full flex-col bg-white">
+    <div className="flex h-full flex-col glass border-r border-white/60">
       <div className="h-16 flex items-center justify-between px-5 border-b border-ink-100">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-brand-600 to-violet-600 flex items-center justify-center text-white font-bold">B</div>
+          <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#2547f7,#7c3aed)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)]">B</div>
           <div>
             <p className="font-bold text-ink-900 leading-tight">BSDS</p>
             <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Automation Suite</p>
