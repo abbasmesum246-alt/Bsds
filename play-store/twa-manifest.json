@@ -1,0 +1,21 @@
+{
+  "packageId": "app.bsds.twa",
+  "host": "bsds.app",
+  "name": "BSDS — Dropshipping Automation",
+  "launcherName": "BSDS",
+  "display": "standalone",
+  "themeColor": "#1d40f5",
+  "backgroundColor": "#f6f7f9",
+  "orientation": "portrait",
+  "startUrl": "/dashboard?source=twa",
+  "iconUrl": "https://bsds.app/icons/maskable-512.png",
+  "maskableIconUrl": "https://bsds.app/icons/maskable-512.png",
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    { "name": "Dashboard", "url": "/dashboard?source=twa" },
+    { "name": "Products", "url": "/dashboard/products?source=twa" },
+    { "name": "Orders", "url": "/dashboard/orders?source=twa" }
+  ],
+  "enableNotifications": true
+}
