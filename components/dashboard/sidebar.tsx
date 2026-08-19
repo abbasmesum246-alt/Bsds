@@ -42,7 +42,10 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
           const active = isActive(item.href);
           return (
             <Link key={item.href} href={item.href} onClick={onClose}
-              className={cn("flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition", active ? "bg-brand-50 text-brand-700" : "text-ink-600 hover:bg-ink-50 hover:text-ink-900")}>
+              className={cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all",
+                active ? "nav-active" : "text-ink-600 hover:bg-ink-50/80"
+              )}>
               <Icon className={cn("h-[18px] w-[18px] shrink-0", active ? "text-brand-600" : "text-ink-400")} />
               <span className="flex-1">{item.label}</span>
               {item.label === "Orders" && pendingOrders ? <span className="badge bg-amber-100 text-amber-700">{pendingOrders}</span> : null}
@@ -56,7 +59,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
             const active = isActive(item.href);
             return (
               <Link key={item.label} href={item.href} onClick={onClose}
-                className={cn("flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition", active ? "bg-brand-50 text-brand-700" : "text-ink-600 hover:bg-ink-50")}>
+                className={cn("flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition", active ? "nav-active" : "text-ink-600 hover:bg-ink-50/80")}>
                 <Icon className={cn("h-[18px] w-[18px] shrink-0", active ? "text-brand-600" : "text-ink-400")} />
                 {item.label}
               </Link>
