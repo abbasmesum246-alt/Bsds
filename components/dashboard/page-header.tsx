@@ -2,7 +2,11 @@ export function PageHeader({ title, description, action, icon }: { title: string
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
       <div className="flex items-center gap-3 min-w-0">
-        {icon && <div className="h-11 w-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">{icon}</div>}
+        {icon && (
+          <div className="h-11 w-11 rounded-xl bg-[linear-gradient(135deg,rgba(37,71,247,0.12),rgba(124,58,237,0.12))] text-brand-600 flex items-center justify-center shrink-0 ring-1 ring-brand-100/60">
+            {icon}
+          </div>
+        )}
         <div className="min-w-0">
           <h1 className="text-xl md:text-2xl font-bold text-ink-900 tracking-tight truncate">{title}</h1>
           {description && <p className="text-sm text-ink-500 mt-0.5">{description}</p>}
