@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSecret } from "@/lib/secrets";
+import { secrets } from "@/lib/db";
 import { requireUser } from "@/lib/auth-helpers";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q") || "best affiliate programs 2026";
 
-  const key = getSecret("RAPIDAPI_KEY");
+  const key = secrets.get("RAPIDAPI_KEY");
   if (!key) {
     return NextResponse.json({
       enabled: false,

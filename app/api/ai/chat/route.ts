@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getSecret } from "@/lib/secrets";
-import { requireUser } from "@/lib/api-helpers";
+import { secrets } from "@/lib/db";
+import { requireUser } from "@/lib/auth-helpers";
 import { TOOLS, callTool } from "@/lib/ai/tools";
 import type { SafeUser } from "@/lib/types";
 
@@ -24,15 +24,15 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const messages: Msg[] = Array.isArray(body.messages) ? body.messages : [];
 
-  const apiKey = getSecret("GROQ_API_KEY") || getSecret("OPENAI_API_KEY");
+  const apiKey = secrets.get("GROQ_API_KEY") || secrets.get("OPENAI_API_KEY");
   if (!apiKey) {
     return NextResponse.json(
-      { error: "NO_AI_KEY", message: "Add a free Groq API key in Settings → Integrations to enable the AI." },
+      { error: "NO_AI_KEY", message: "Add a free Groq API key in Settings → Integrations to enable the AI. Get one free at console.groq.com/keys." },
       { status: 400 }
     );
   }
 
-  const useGroq = Boolean(getSecret("GROQ_API_KEY"));
+  const useGroq = Boolean(secrets.get("GROQ_API_KEY"));
   const endpoint = useGroq
     ? "https://api.groq.com/openai/v1/chat/completions"
     : "https://api.openai.com/v1/chat/completions";

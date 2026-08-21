@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator, Award, Puzzle, Megaphone, Tags, Network, Target, ListChecks } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator, Award, Puzzle, Megaphone, Tags, Network, Target, ListChecks, GraduationCap } from "lucide-react";
 
 const nav = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -11,6 +11,7 @@ const nav = [
   { label: "Networks", href: "/dashboard/networks", icon: Network },
   { label: "Campaigns", href: "/dashboard/campaigns", icon: ListChecks },
   { label: "Strategy", href: "/dashboard/strategy", icon: Target },
+  { label: "Academy", href: "/dashboard/learn", icon: GraduationCap },
   { label: "Products", href: "/dashboard/products", icon: Package },
   { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { label: "Finance", href: "/dashboard/finance", icon: BarChart3 },
