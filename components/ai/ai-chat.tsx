@@ -78,9 +78,10 @@ export function AiChat() {
     <>
       {/* Floating button */}
       <button
+        data-ai-launcher
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full text-white flex items-center justify-center shadow-[0_12px_32px_-8px_rgba(37,71,247,0.7)] transition-all hover:scale-105",
+          "fixed bottom-5 left-1/2 -translate-x-1/2 z-40 h-14 w-14 rounded-full text-white flex items-center justify-center shadow-[0_12px_32px_-8px_rgba(37,71,247,0.7)] transition-all hover:scale-105",
           open ? "bg-ink-800 rotate-90" : "bg-[linear-gradient(135deg,#2547f7,#7c3aed)]"
         )}
         aria-label="AI assistant"
