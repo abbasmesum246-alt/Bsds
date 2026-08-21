@@ -7,6 +7,7 @@ import { Topbar } from "@/components/dashboard/topbar";
 import { useQuery } from "@/hooks/use-api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AiChat } from "@/components/ai/ai-chat";
+import { ModeProvider } from "@/components/affiliate/mode-context";
 
 function Shell({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -34,6 +35,7 @@ function Shell({ children }: { children: React.ReactNode }) {
     );
   }
   return (
+    <ModeProvider>
     <div className="min-h-screen bg-ink-50">
       <Sidebar open={open} onClose={() => setOpen(false)} pendingOrders={data?.counts?.pendingOrders} />
       <div className="lg:pl-64">
@@ -42,6 +44,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         <AiChat />
       </div>
     </div>
+    </ModeProvider>
   );
 }
 

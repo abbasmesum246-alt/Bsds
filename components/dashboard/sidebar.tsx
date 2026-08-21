@@ -2,15 +2,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator, Award, Puzzle } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator, Award, Puzzle, Megaphone, Tags, Network, Target, ListChecks } from "lucide-react";
 
 const nav = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Affiliate Hub", href: "/dashboard/affiliate", icon: Megaphone, badge: "NEW" },
+  { label: "Offers", href: "/dashboard/offers", icon: Tags },
+  { label: "Networks", href: "/dashboard/networks", icon: Network },
+  { label: "Campaigns", href: "/dashboard/campaigns", icon: ListChecks },
+  { label: "Strategy", href: "/dashboard/strategy", icon: Target },
   { label: "Products", href: "/dashboard/products", icon: Package },
   { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { label: "Finance", href: "/dashboard/finance", icon: BarChart3 },
   { label: "Calculator", href: "/dashboard/calculator", icon: Calculator },
-  { label: "Best Suppliers", href: "/dashboard/best-suppliers", icon: Award, badge: "NEW" },
+  { label: "Best Suppliers", href: "/dashboard/best-suppliers", icon: Award },
   { label: "Stores", href: "/dashboard/stores", icon: Store },
   { label: "Suppliers", href: "/dashboard/suppliers", icon: Truck },
   { label: "Automations", href: "/dashboard/automations", icon: Workflow },
