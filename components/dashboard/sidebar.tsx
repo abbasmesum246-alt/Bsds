@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow, Settings, LifeBuoy, X, Sparkles, BarChart3, Calculator, Award, Puzzle } from "lucide-react";
 
 const nav = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -10,11 +10,13 @@ const nav = [
   { label: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { label: "Finance", href: "/dashboard/finance", icon: BarChart3 },
   { label: "Calculator", href: "/dashboard/calculator", icon: Calculator },
+  { label: "Best Suppliers", href: "/dashboard/best-suppliers", icon: Award, badge: "NEW" },
   { label: "Stores", href: "/dashboard/stores", icon: Store },
   { label: "Suppliers", href: "/dashboard/suppliers", icon: Truck },
   { label: "Automations", href: "/dashboard/automations", icon: Workflow },
 ];
 const bottom = [
+  { label: "Integrations", href: "/dashboard/integrations", icon: Puzzle },
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
   { label: "Help & support", href: "#", icon: LifeBuoy },
 ];
@@ -49,6 +51,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
               <Icon className={cn("h-[18px] w-[18px] shrink-0", active ? "text-brand-600" : "text-ink-400")} />
               <span className="flex-1">{item.label}</span>
               {item.label === "Orders" && pendingOrders ? <span className="badge bg-amber-100 text-amber-700">{pendingOrders}</span> : null}
+              {"badge" in item && item.badge ? <span className="badge bg-brand-600 text-white text-[9px] px-1.5 py-0">{item.badge}</span> : null}
             </Link>
           );
         })}

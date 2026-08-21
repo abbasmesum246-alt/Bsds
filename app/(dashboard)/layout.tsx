@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/dashboard/sidebar";
 import { Topbar } from "@/components/dashboard/topbar";
 import { useQuery } from "@/hooks/use-api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AiChat } from "@/components/ai/ai-chat";
 
 function Shell({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -38,6 +39,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       <div className="lg:pl-64">
         <Topbar onMenuClick={() => setOpen(true)} />
         <main className="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto">{children}</main>
+        <AiChat />
       </div>
     </div>
   );
