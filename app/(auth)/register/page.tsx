@@ -5,6 +5,7 @@ import { useAuth } from "@/components/auth-provider";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
+import { Wordmark } from "@/components/brand/logo";
 
 export default function RegisterPage() {
   const { register, loading } = useAuth();
@@ -25,9 +26,8 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <div className="lg:hidden flex items-center gap-2 mb-8">
-        <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)]">B</div>
-        <span className="font-bold text-lg text-gradient">BSDS</span>
+      <div className="lg:hidden">
+        <Wordmark size={44} />
       </div>
       <h1 className="text-2xl font-bold text-ink-900">Create your account</h1>
       <p className="text-sm text-ink-500 mt-1">Start automating your dropshipping business in minutes.</p>

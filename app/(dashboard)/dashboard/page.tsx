@@ -31,9 +31,9 @@ export default function DashboardPage() {
         action={<Link href="/dashboard/products" className="inline-flex items-center gap-2 rounded-lg bg-brand-600 text-white px-3.5 py-2 text-sm font-medium hover:bg-brand-700"><Package className="h-4 w-4" />Import product</Link>} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="Revenue (30 days)" value={data.revenue} delta={data.revenueDelta} format="currency" icon={<DollarSign className="h-5 w-5" />} tone="green" />
-        <StatCard label="Orders" value={data.orders} delta={data.ordersDelta} icon={<ShoppingCart className="h-5 w-5" />} tone="brand" />
-        <StatCard label="Net profit" value={data.profit} delta={data.profitDelta} format="currency" icon={<TrendingUp className="h-5 w-5" />} tone="purple" />
+        <StatCard label="Revenue (30 days)" value={formatCurrency(data.revenue)} delta={data.revenueDelta} icon={<DollarSign className="h-5 w-5" />} tone="teal" />
+        <StatCard label="Orders" value={data.orders} delta={data.ordersDelta} icon={<ShoppingCart className="h-5 w-5" />} tone="indigo" />
+        <StatCard label="Net profit" value={formatCurrency(data.profit)} delta={data.profitDelta} icon={<TrendingUp className="h-5 w-5" />} tone="violet" />
         <StatCard label="Active products" value={data.products} delta={data.productsDelta} icon={<Package className="h-5 w-5" />} tone="sky" />
       </div>
 
@@ -49,7 +49,7 @@ export default function DashboardPage() {
         <Card className="lg:col-span-2">
           <CardHeader className="flex flex-row items-center justify-between">
             <div><CardTitle>Revenue</CardTitle><p className="text-sm text-ink-500 mt-0.5">Last 14 days</p></div>
-            <Badge tone="green"><TrendingUp className="h-3 w-3" />{data.revenueDelta.toFixed(1)}%</Badge>
+            <Badge tone="teal"><TrendingUp className="h-3 w-3" />{data.revenueDelta.toFixed(1)}%</Badge>
           </CardHeader>
           <CardContent>
             <div className="h-72">

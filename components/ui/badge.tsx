@@ -1,16 +1,22 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type Tone = "gray" | "green" | "yellow" | "red" | "blue" | "purple" | "brand" | "orange";
+type Tone = "gray" | "green" | "yellow" | "red" | "blue" | "purple" | "brand" | "orange" | "teal" | "indigo" | "rose" | "sky" | "amber" | "violet";
 const tones: Record<Tone, string> = {
-  gray: "bg-ink-100 text-ink-700",
+  gray: "bg-slate-100 text-slate-700",
   green: "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200",
   yellow: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200",
   red: "bg-red-50 text-red-700 ring-1 ring-inset ring-red-200",
   blue: "bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200",
   purple: "bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-200",
-  brand: "bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200",
+  brand: "bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-200",
   orange: "bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-200",
+  teal: "bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-200",
+  indigo: "bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-200",
+  rose: "bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200",
+  sky: "bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200",
+  amber: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200",
+  violet: "bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-200",
 };
 
 export function Badge({ tone = "gray", className, ...props }: React.HTMLAttributes<HTMLSpanElement> & { tone?: Tone }) {
@@ -27,9 +33,11 @@ const statusTone: Record<string, Tone> = {
 export function StatusBadge({ status }: { status: string }) {
   const tone = statusTone[status] ?? "gray";
   const dot: Record<Tone, string> = {
-    gray: "bg-ink-400", green: "bg-emerald-500", yellow: "bg-amber-500",
+    gray: "bg-slate-400", green: "bg-emerald-500", yellow: "bg-amber-500",
     red: "bg-red-500", blue: "bg-sky-500", purple: "bg-violet-500",
-    brand: "bg-brand-500", orange: "bg-orange-500",
+    brand: "bg-indigo-500", orange: "bg-orange-500",
+    teal: "bg-teal-500", indigo: "bg-indigo-500", rose: "bg-rose-500",
+    sky: "bg-sky-500", amber: "bg-amber-500", violet: "bg-violet-500",
   };
   return (
     <Badge tone={tone} className="capitalize">

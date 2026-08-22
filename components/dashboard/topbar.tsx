@@ -1,89 +1,89 @@
 "use client";
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Menu, Search, Bell, LogOut, User as UserIcon, Settings, ChevronDown } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
-import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem, DropdownSeparator, DropdownLabel } from "@/components/ui/dropdown";
+import { usePathname } from "next/navigation";
+import { Menu, Search, Bell, HelpCircle, ChevronRight, Sparkles } from "lucide-react";
 import { useAuth } from "@/components/auth-provider";
-import { useQuery } from "@/hooks/use-api";
-import { timeAgo } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-interface ActivityItem { id: string; message: string; createdAt: string; }
+const TITLES: Record<string, { title: string; sub: string }> = {
+  "/dashboard": { title: "Dashboard", sub: "Your business at a glance" },
+  "/dashboard/affiliate": { title: "Affiliate Hub", sub: "Offers, campaigns & strategy" },
+  "/dashboard/offers": { title: "Offer Marketplace", sub: "25+ real affiliate programs" },
+  "/dashboard/networks": { title: "Affiliate Networks", sub: "Compare platforms" },
+  "/dashboard/campaigns": { title: "Campaigns", sub: "Track every link" },
+  "/dashboard/strategy": { title: "AI Strategy", sub: "Generated for your niche" },
+  "/dashboard/learn": { title: "Academy", sub: "Learn affiliate marketing" },
+  "/dashboard/products": { title: "Products", sub: "Manage your catalog" },
+  "/dashboard/orders": { title: "Orders", sub: "Fulfillment & tracking" },
+  "/dashboard/finance": { title: "Finance", sub: "Profit & performance" },
+  "/dashboard/calculator": { title: "Price Calculator", sub: "Price for real profit" },
+  "/dashboard/best-suppliers": { title: "Best Suppliers", sub: "Curated & scored" },
+  "/dashboard/stores": { title: "Stores", sub: "Your sales channels" },
+  "/dashboard/suppliers": { title: "Suppliers", sub: "Fulfillment partners" },
+  "/dashboard/automations": { title: "Automations", sub: "If-this-then-that rules" },
+  "/dashboard/integrations": { title: "Integrations", sub: "Connect real services" },
+  "/dashboard/settings": { title: "Settings", sub: "Your account" },
+};
 
 export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
-  const { user, logout } = useAuth();
-  const router = useRouter();
-  const { data } = useQuery<{ items: ActivityItem[] }>("/api/activities?limit=6");
-  const [notifOpen, setNotifOpen] = React.useState(false);
-  if (!user) return null;
-  const activities = data?.items ?? [];
+  const pathname = usePathname();
+  const { user } = useAuth();
+  const [focused, setFocused] = React.useState(false);
 
-  function onSearchKey(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      const q = (e.target as HTMLInputElement).value.trim();
-      if (q) router.push("/dashboard/products?q=" + encodeURIComponent(q));
-    }
-  }
+  // Find the deepest matching title
+  const meta = React.useMemo(() => {
+    const keys = Object.keys(TITLES).sort((a, b) => b.length - a.length);
+    const match = keys.find((k) => pathname === k || pathname.startsWith(k + "/"));
+    return match ? TITLES[match] : { title: "BSD", sub: "Business Scientist Design" };
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-20 h-16 glass border-b border-white/60">
-      <div className="h-full px-4 sm:px-6 flex items-center gap-3">
-        <button onClick={onMenuClick} className="lg:hidden p-2 -ml-2 rounded-lg text-ink-600 hover:bg-ink-100" aria-label="Open menu"><Menu className="h-5 w-5" /></button>
-        <div className="relative flex-1 max-w-xl hidden sm:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-400" />
-          <input type="search" placeholder="Search products, orders, customers..." onKeyDown={onSearchKey}
-            className="w-full h-9 pl-9 pr-3 rounded-lg bg-ink-50 border border-transparent focus:bg-white focus:border-brand-300 focus:ring-2 focus:ring-brand-100 text-sm outline-none transition" />
+    <header className="sticky top-0 z-20 glass border-b border-white/60">
+      <div className="h-16 px-4 sm:px-6 flex items-center gap-3">
+        <button onClick={onMenuClick} className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-slate-100 text-slate-600">
+          <Menu className="h-5 w-5" />
+        </button>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <Link href="/dashboard" className="hover:text-indigo-600">BSD</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="truncate text-slate-600">{meta.title}</span>
+          </div>
+          <h1 className="text-lg font-extrabold text-slate-900 leading-tight truncate">{meta.title}</h1>
         </div>
-        <div className="flex-1 sm:hidden" />
-        <div className="relative">
-          <button onClick={() => setNotifOpen((v) => !v)} className="relative p-2 rounded-lg text-ink-600 hover:bg-ink-100" aria-label="Notifications">
+
+        {/* Command search */}
+        <div className="hidden md:block relative max-w-xs flex-1">
+          <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 transition", focused ? "text-indigo-500" : "text-slate-400")} />
+          <input
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            placeholder="Search or jump to…"
+            className={cn(
+              "w-full h-10 pl-9 pr-16 rounded-xl bg-white/70 border text-sm transition outline-none",
+              focused ? "border-indigo-400 ring-4 ring-indigo-100/70" : "border-slate-200"
+            )}
+          />
+          <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 rounded px-1.5 py-0.5">⌘K</kbd>
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          <Link href="/dashboard/strategy" className="hidden sm:flex items-center gap-1.5 h-9 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-600 text-white text-xs font-bold shadow-sm hover:shadow-md transition">
+            <Sparkles className="h-3.5 w-3.5" /> AI
+          </Link>
+          <button className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 relative">
             <Bell className="h-5 w-5" />
-            {activities.length > 0 && <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />}
+            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-white" />
           </button>
-          {notifOpen && (
-            <>
-              <div className="fixed inset-0 z-30" onClick={() => setNotifOpen(false)} />
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-pop ring-1 ring-ink-100 z-40 animate-fade-in">
-                <div className="px-4 py-3 border-b border-ink-100 flex items-center justify-between">
-                  <p className="font-semibold text-sm">Activity</p>
-                  <span className="text-xs text-ink-400">Recent</span>
-                </div>
-                <div className="max-h-80 overflow-y-auto py-1">
-                  {activities.length === 0 && <p className="px-4 py-8 text-center text-sm text-ink-400">No recent activity</p>}
-                  {activities.map((a) => (
-                    <div key={a.id} className="px-4 py-2.5 hover:bg-ink-50 flex gap-3">
-                      <span className="h-2 w-2 mt-1.5 rounded-full bg-brand-400 shrink-0" />
-                      <div className="min-w-0">
-                        <p className="text-sm text-ink-700 leading-snug line-clamp-2">{a.message}</p>
-                        <p className="text-xs text-ink-400 mt-0.5">{timeAgo(a.createdAt)}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
+          <button className="p-2 rounded-lg hover:bg-slate-100 text-slate-500">
+            <HelpCircle className="h-5 w-5" />
+          </button>
+          <div className="h-8 w-8 ml-1 rounded-full bg-gradient-to-br from-indigo-600 to-teal-600 text-white flex items-center justify-center text-xs font-extrabold ring-2 ring-white shadow">
+            {user?.name?.[0]?.toUpperCase() || "A"}
+          </div>
         </div>
-        <Dropdown>
-          <DropdownTrigger asChild>
-            <button className="flex items-center gap-2 p-1 pr-2 rounded-lg hover:bg-ink-100 transition">
-              <Avatar name={user.name} color={user.avatarColor} size={32} />
-              <div className="hidden md:block text-left">
-                <p className="text-sm font-semibold text-ink-900 leading-tight">{user.name}</p>
-                <p className="text-xs text-ink-500 leading-tight">{user.plan} plan</p>
-              </div>
-              <ChevronDown className="h-4 w-4 text-ink-400 hidden md:block" />
-            </button>
-          </DropdownTrigger>
-          <DropdownContent>
-            <DropdownLabel>{user.email}</DropdownLabel>
-            <DropdownItem icon={<UserIcon className="h-4 w-4" />}><Link href="/dashboard/settings">Profile</Link></DropdownItem>
-            <DropdownItem icon={<Settings className="h-4 w-4" />}><Link href="/dashboard/settings">Settings</Link></DropdownItem>
-            <DropdownSeparator />
-            <DropdownItem danger icon={<LogOut className="h-4 w-4" />} onClick={logout}>Sign out</DropdownItem>
-          </DropdownContent>
-        </Dropdown>
       </div>
     </header>
   );

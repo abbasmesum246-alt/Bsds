@@ -12,10 +12,12 @@ export interface User {
   id: ID; name: string; email: string; passwordHash: string;
   company?: string; avatarColor: string; plan: "Starter" | "Business" | "Enterprise";
   createdAt: string;
+  oauthProvider?: "github" | "google";
 }
 export interface SafeUser {
   id: ID; name: string; email: string; company?: string;
   avatarColor: string; plan: string; createdAt: string;
+  oauthProvider?: string;
 }
 export interface Store {
   id: ID; userId: ID; name: string; platform: Platform; url: string;

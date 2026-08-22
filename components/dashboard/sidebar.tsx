@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/auth-provider";
+import { Wordmark } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, Package, ShoppingCart, Store, Truck, Workflow,
@@ -61,15 +62,11 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
   const content = (
     <div className="flex h-full flex-col glass border-r border-white/60">
       {/* Logo */}
-      <div className="h-16 flex items-center justify-between px-5 border-b border-ink-100/80">
-        <Link href="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)] group-hover:scale-105 transition">B</div>
-          <div>
-            <p className="font-extrabold text-ink-900 leading-tight">BSDS</p>
-            <p className="text-[9px] uppercase tracking-[0.18em] text-ink-400 font-bold">Business Suite</p>
-          </div>
+      <div className="h-16 flex items-center justify-between px-5 border-b border-slate-200/70">
+        <Link href="/dashboard" className="group">
+          <Wordmark size={38} />
         </Link>
-        <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-ink-500 hover:bg-ink-100"><X className="h-5 w-5" /></button>
+        <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100"><X className="h-5 w-5" /></button>
       </div>
 
       {/* Nav */}

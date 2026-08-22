@@ -2,9 +2,11 @@
 import * as React from "react";
 import Link from "next/link";
 import { useAuth } from "@/components/auth-provider";
+import { Wordmark } from "@/components/brand/logo";
 import { Input, Label } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
-import { Loader2, ArrowRight, Sparkles, ShieldCheck, Zap, Eye, EyeOff, Github, Mail, PlayCircle } from "lucide-react";
+import { GithubTutorial, GoogleTutorial } from "@/components/auth/oauth-tutorial";
+import { Loader2, ArrowRight, Sparkles, ShieldCheck, Zap, Eye, EyeOff, Mail, PlayCircle } from "lucide-react";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -16,6 +18,7 @@ export default function LoginPage() {
   const [loading, setLoading] = React.useState(false);
   const [showEmail, setShowEmail] = React.useState(false);
   const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
+  const [oauthError, setOauthError] = React.useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,7 +26,6 @@ export default function LoginPage() {
     try {
       await login(email, password);
       toast.success("Welcome back!", "Taking you to your dashboard…");
-      // Hard redirect to ensure cookies are set and the app remounts
       window.location.href = "/dashboard";
     } catch (err) {
       setError((err as Error).message || "Sign in failed");
@@ -32,64 +34,58 @@ export default function LoginPage() {
   }
 
   function startDemo() {
-    setEmail("demo@bsds.app");
-    setPassword("password123");
-    setTimeout(() => {
-      const form = document.getElementById("email-form") as HTMLFormElement | null;
-      form?.requestSubmit();
-    }, 100);
+    setEmail("demo@bsds.app"); setPassword("password123");
+    setTimeout(() => (document.getElementById("email-form") as HTMLFormElement | null)?.requestSubmit(), 100);
   }
 
-  function oauth(provider: string) {
-    setOauthLoading(provider);
-    // In a real production app this redirects to /api/auth/{provider}.
-    // We show a clear message so users know what's required.
-    setTimeout(() => {
-      setOauthLoading(null);
-      toast.info(
-        `${provider} sign-in requires setup`,
-        `Add ${provider} OAuth credentials in Integrations to enable this. Use email or demo below.`
-      );
-    }, 900);
+  function startOAuth(provider: "github" | "google") {
+    setOauthLoading(provider); setOauthError(null);
+    // Hit the real OAuth start endpoint
+    window.location.href = `/api/auth/oauth/${provider}`;
   }
+
+  // Show message if redirected back with an error (e.g. OAuth not configured)
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error") === "oauth-not-configured") {
+      setOauthError("OAuth isn't set up yet. Follow the tutorial below to enable it in 2 minutes — or use email/demo.");
+      setOauthLoading(null);
+    }
+  }, []);
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="lg:hidden flex items-center gap-2 mb-8">
-        <div className="h-11 w-11 rounded-2xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white font-extrabold text-lg shadow-[0_10px_30px_-8px_rgba(79,70,229,0.7)]">B</div>
-        <div>
-          <p className="font-extrabold text-xl text-gradient leading-none">BSDS</p>
-          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-slate-400 mt-0.5">Business Suite</p>
-        </div>
+      <div className="lg:hidden mb-8">
+        <Wordmark size={44} />
       </div>
 
       <div className="mb-7">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 text-indigo-700 px-3 py-1 text-xs font-bold mb-4 ring-1 ring-indigo-100">
-          <Sparkles className="h-3.5 w-3.5" /> All-in-one dropshipping & affiliate platform
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-teal-50 text-indigo-700 px-3 py-1 text-xs font-bold mb-4 ring-1 ring-indigo-100">
+          <Sparkles className="h-3.5 w-3.5" /> Business Scientist Design
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Sign in</h1>
-        <p className="text-slate-500 mt-1.5">Welcome back. Let's grow your business.</p>
+        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          Sign in to<br />
+          <span className="text-gradient">your command center</span>
+        </h1>
+        <p className="text-slate-500 mt-2">Dropshipping, affiliate & analytics — one platform.</p>
       </div>
 
-      {/* Social buttons */}
+      {oauthError && (
+        <div className="mb-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3.5 py-2.5">{oauthError}</div>
+      )}
+
       <div className="space-y-2.5">
-        <button
-          type="button"
-          onClick={() => oauth("GitHub")}
-          disabled={!!oauthLoading}
-          className="w-full h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm flex items-center justify-center gap-3 transition disabled:opacity-60"
-        >
-          {oauthLoading === "GitHub" ? <Loader2 className="h-5 w-5 animate-spin" /> : <Github className="h-5 w-5" />}
+        <button type="button" onClick={() => startOAuth("github")} disabled={!!oauthLoading}
+          className="group w-full h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-3 transition relative overflow-hidden disabled:opacity-60">
+          {oauthLoading === "github" ? <Loader2 className="h-5 w-5 animate-spin" /> : <GithubMark />}
           Continue with GitHub
+          <ArrowRight className="h-4 w-4 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
         </button>
-        <button
-          type="button"
-          onClick={() => oauth("Google")}
-          disabled={!!oauthLoading}
-          className="w-full h-12 rounded-xl bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-800 font-semibold text-sm flex items-center justify-center gap-3 transition disabled:opacity-60"
-        >
-          {oauthLoading === "Google" ? <Loader2 className="h-5 w-5 animate-spin" /> : <GoogleIcon />}
+        <button type="button" onClick={() => startOAuth("google")} disabled={!!oauthLoading}
+          className="group w-full h-12 rounded-xl bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-800 font-bold text-sm flex items-center justify-center gap-3 transition disabled:opacity-60">
+          {oauthLoading === "google" ? <Loader2 className="h-5 w-5 animate-spin" /> : <GoogleMark />}
           Continue with Google
+          <ArrowRight className="h-4 w-4 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
         </button>
       </div>
 
@@ -122,35 +118,34 @@ export default function LoginPage() {
               </button>
             </div>
           </div>
-
-          {error && (
-            <div className="rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-3.5 py-2.5 flex items-start gap-2">
-              <span className="font-bold">!</span>{error}
-            </div>
-          )}
-
+          {error && <div className="rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-3.5 py-2.5"><strong>!</strong> {error}</div>}
           <button type="submit" disabled={loading} className="btn-premium w-full h-12 text-base">
             {loading ? <><Loader2 className="h-5 w-5 animate-spin" />Signing in…</> : <>Sign in <ArrowRight className="h-5 w-5" /></>}
           </button>
         </form>
       )}
 
-      {/* Demo */}
       <div className="mt-5">
-        <button onClick={startDemo} className="w-full h-11 rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50/50 hover:bg-indigo-50 hover:border-indigo-400 text-indigo-700 font-bold text-sm flex items-center justify-center gap-2 transition">
+        <button onClick={startDemo} className="w-full h-11 rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50/40 hover:bg-indigo-50 hover:border-indigo-400 text-indigo-700 font-bold text-sm flex items-center justify-center gap-2 transition">
           <PlayCircle className="h-4 w-4" /> Try the live demo (no sign-up)
         </button>
+      </div>
+
+      {/* Setup tutorials */}
+      <div className="mt-6 space-y-2">
+        <GithubTutorial />
+        <GoogleTutorial />
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-4 text-[11px] text-slate-400">
         <span className="flex items-center gap-1"><ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Encrypted</span>
         <span>·</span>
-        <span className="flex items-center gap-1"><Zap className="h-3.5 w-3.5 text-amber-500" /> Instant access</span>
+        <span className="flex items-center gap-1"><Zap className="h-3.5 w-3.5 text-amber-500" /> Instant</span>
         <span>·</span>
         <span>No credit card</span>
       </div>
 
-      <p className="mt-8 text-center text-sm text-slate-500">
+      <p className="mt-6 text-center text-sm text-slate-500">
         New here?{" "}
         <Link href="/register" className="text-indigo-600 font-bold hover:underline">Create a free account</Link>
       </p>
@@ -158,13 +153,18 @@ export default function LoginPage() {
   );
 }
 
-function GoogleIcon() {
+function GithubMark() {
+  return (
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.21 1.79 1.21 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.42.36.8 1.08.8 2.18v3.23c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+  );
+}
+function GoogleMark() {
   return (
     <svg className="h-5 w-5" viewBox="0 0 24 24">
       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
     </svg>
   );
 }
