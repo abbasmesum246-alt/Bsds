@@ -25,11 +25,13 @@ export default function RegisterPage() {
   }
 
   return (
-    <div>
-      <div className="lg:hidden">
-        <Wordmark size={44} />
+    <div className="w-full max-w-md mx-auto">
+      <div className="lg:hidden mb-8 flex justify-center">
+        <Wordmark size={48} />
       </div>
-      <h1 className="text-2xl font-bold text-ink-900">Create your account</h1>
+      <div className="relative rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/80 p-7 sm:p-9 shadow-[0_30px_80px_-30px_rgba(15,23,42,.35)] animate-scale-in">
+        <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-indigo-200/40 via-transparent to-teal-200/40 -z-10 blur-xl" />
+      <h1 className="text-3xl font-extrabold tracking-tight text-ink-900">Create your account</h1>
       <p className="text-sm text-ink-500 mt-1">Start automating your dropshipping business in minutes.</p>
       <form onSubmit={onSubmit} className="mt-8 space-y-4">
         <div>
@@ -55,8 +57,9 @@ export default function RegisterPage() {
         <p className="text-xs text-ink-400 text-center">By creating an account you agree to our Terms and Privacy Policy.</p>
       </form>
       <p className="mt-8 text-center text-sm text-ink-500">
-        Already have an account? <Link href="/login" className="text-brand-600 font-semibold hover:underline">Sign in</Link>
+        Already have an account? <Link href="/login" className="text-indigo-600 font-bold hover:underline">Sign in</Link>
       </p>
+      </div>
     </div>
   );
 }

@@ -6,19 +6,21 @@ type Variant = "primary" | "secondary" | "ghost" | "danger" | "subtle" | "premiu
 type Size = "sm" | "md" | "lg" | "icon";
 
 const variants: Record<Variant, string> = {
-  premium:
-    "text-white shadow-[0_1px_2px_rgba(29,64,245,0.3),0_8px_20px_-8px_rgba(29,64,245,0.6)] hover:shadow-[0_2px_4px_rgba(29,64,245,0.4),0_12px_28px_-8px_rgba(124,58,237,0.7)] hover:-translate-y-0.5 active:translate-y-0 bg-[linear-gradient(135deg,#4f46e5,#0d9488)]",
-  primary: "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-sm",
-  secondary: "bg-white text-ink-700 border border-ink-200 hover:bg-ink-50 hover:border-ink-300",
-  ghost: "text-ink-600 hover:bg-ink-100 hover:text-ink-900",
-  danger: "bg-red-600 text-white hover:bg-red-700",
-  subtle: "bg-brand-50 text-brand-700 hover:bg-brand-100",
+  premium: "btn-premium !px-4 !py-2",
+  primary:
+    "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-[0_8px_20px_-10px_rgba(79,70,229,.7)] hover:shadow-[0_12px_26px_-10px_rgba(79,70,229,.8)] hover:-translate-y-0.5",
+  secondary:
+    "bg-white/80 backdrop-blur text-ink-700 border border-ink-200 hover:bg-white hover:border-ink-300 hover:shadow-soft",
+  ghost: "text-ink-600 hover:bg-ink-100/80 hover:text-ink-900",
+  danger:
+    "bg-red-600 text-white hover:bg-red-700 shadow-[0_8px_20px_-10px_rgba(220,38,38,.7)] hover:-translate-y-0.5",
+  subtle: "bg-brand-50 text-brand-700 hover:bg-brand-100 ring-1 ring-inset ring-brand-100",
 };
 const sizes: Record<Size, string> = {
-  sm: "px-2.5 py-1.5 text-xs",
-  md: "px-3.5 py-2 text-sm",
-  lg: "px-4 py-2.5 text-sm",
-  icon: "h-9 w-9 p-0",
+  sm: "px-3 py-1.5 text-xs rounded-lg",
+  md: "px-4 py-2.5 text-sm rounded-xl",
+  lg: "px-5 py-3 text-sm rounded-xl",
+  icon: "h-10 w-10 p-0 rounded-xl",
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

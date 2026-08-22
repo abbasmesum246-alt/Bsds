@@ -63,9 +63,12 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="lg:hidden mb-8">
-        <Wordmark size={44} />
+      <div className="lg:hidden mb-8 flex justify-center">
+        <Wordmark size={48} />
       </div>
+
+      <div className="relative rounded-3xl bg-white/80 backdrop-blur-2xl border border-white/80 p-7 sm:p-9 shadow-[0_30px_80px_-30px_rgba(15,23,42,.35)] animate-scale-in">
+        <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-indigo-200/40 via-transparent to-teal-200/40 -z-10 blur-xl" />
 
       <div className="mb-7">
         <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-teal-50 text-indigo-700 px-3 py-1 text-xs font-bold mb-4 ring-1 ring-indigo-100">
@@ -158,6 +161,7 @@ export default function LoginPage() {
         New here?{" "}
         <Link href="/register" className="text-indigo-600 font-bold hover:underline">Create a free account</Link>
       </p>
+      </div>
     </div>
   );
 }

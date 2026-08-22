@@ -60,9 +60,12 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
   const isActive = (href: string) => (href === "/dashboard" ? pathname === href : pathname.startsWith(href));
 
   const content = (
-    <div className="flex h-full flex-col glass border-r border-white/60">
+    <div className="flex h-full flex-col bg-white/70 backdrop-blur-2xl border-r border-white/70 relative">
+      {/* ambient glow */}
+      <div className="pointer-events-none absolute -top-20 -left-16 h-56 w-56 rounded-full bg-indigo-300/25 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-24 -right-16 h-56 w-56 rounded-full bg-teal-300/20 blur-3xl" />
       {/* Logo */}
-      <div className="h-16 flex items-center justify-between px-5 border-b border-slate-200/70">
+      <div className="relative h-16 flex items-center justify-between px-5 border-b border-slate-200/70">
         <Link href="/dashboard" className="group">
           <Wordmark size={38} />
         </Link>
@@ -84,7 +87,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
                       "group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold transition-all relative",
                       active ? "nav-active text-brand-700" : "text-ink-600 hover:bg-ink-50/80"
                     )}>
-                    {active && <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-r-full bg-gradient-to-b from-brand-500 to-violet-500" />}
+                    {active && <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-r-full bg-gradient-to-b from-brand-500 via-indigo-500 to-teal-500 shadow-[0_0_12px_rgba(99,102,241,.7)]" />}
                     <Icon className={cn("h-[18px] w-[18px] shrink-0 transition", active ? "text-brand-600" : "text-ink-400 group-hover:text-ink-600")} />
                     <span className="flex-1">{item.label}</span>
                     {item.label === "Orders" && pendingOrders ? (
@@ -117,12 +120,13 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
       </nav>
 
       {/* Upgrade card */}
-      <div className="p-3">
-        <div className="rounded-2xl p-4 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#4f46e5,#0d9488)" }}>
-          <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/15" />
-          <div className="relative flex items-center gap-2 mb-1"><Sparkles className="h-4 w-4" /><p className="text-sm font-bold">Upgrade to Pro</p></div>
-          <p className="text-[11px] text-white/80 leading-relaxed relative">Unlimited products, real store sync &amp; priority AI.</p>
-          <button className="mt-3 w-full bg-white/15 hover:bg-white/25 backdrop-blur text-white text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1">
+      <div className="relative p-3">
+        <div className="rounded-2xl p-4 text-white relative overflow-hidden shadow-pop" style={{ background: "linear-gradient(135deg,#4f46e5 0%,#7c3aed 45%,#0d9488 100%)" }}>
+          <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/15 blur-md" />
+          <div className="absolute -bottom-10 -left-6 h-24 w-24 rounded-full bg-teal-300/25 blur-lg" />
+          <div className="relative flex items-center gap-2 mb-1"><Sparkles className="h-4 w-4" /><p className="text-sm font-extrabold">Upgrade to Pro</p></div>
+          <p className="text-[11px] text-white/85 leading-relaxed relative">Unlimited products, real store sync &amp; priority AI.</p>
+          <button className="mt-3 w-full bg-white/20 hover:bg-white/30 backdrop-blur-md ring-1 ring-white/20 text-white text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1 transition">
             Upgrade <ChevronRight className="h-3.5 w-3.5" />
           </button>
         </div>

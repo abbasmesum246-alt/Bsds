@@ -70,7 +70,7 @@ export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <Link href="/dashboard/strategy" className="hidden sm:flex items-center gap-1.5 h-9 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-600 text-white text-xs font-bold shadow-sm hover:shadow-md transition">
+          <Link href="/dashboard/strategy" className="hidden sm:flex items-center gap-1.5 h-9 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-600 text-white text-xs font-bold shadow-[0_8px_20px_-8px_rgba(79,70,229,.7)] hover:shadow-pop hover:-translate-y-0.5 transition-all relative overflow-hidden shine">
             <Sparkles className="h-3.5 w-3.5" /> AI
           </Link>
           <button className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 relative">
