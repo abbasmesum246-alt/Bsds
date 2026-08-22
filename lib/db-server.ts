@@ -42,13 +42,13 @@ function loadJson(): DBShape {
   try {
     if (existsSync(jsonFile)) {
       _json = { ...emptyShape(), ...JSON.parse(readFileSync(jsonFile, "utf8")) };
-      return _json;
+      if (_json.users.length > 0) return _json;
     }
-  } catch { /* fall through */ }
+  } catch { /* fall through to seed */ }
   // First run: seed demo data
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { buildSeed } = require("./scripts/seed-data");
+    const { buildSeed } = require("../scripts/seed-data");
     _json = buildSeed();
     saveJson();
   } catch {

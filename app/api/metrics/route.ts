@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDB } from "@/lib/db";
+import { readDB } from "@/lib/db-server";
 import { requireUser } from "@/lib/api-helpers";
 
 export const dynamic = "force-dynamic";

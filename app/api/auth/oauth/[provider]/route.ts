@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createSessionToken, toSafeUser, COOKIE_NAME, COOKIE_OPTS, pickAvatarColor } from "@/lib/auth";
-import { readDB, writeDB } from "@/lib/db";
+import { readDB, writeDB } from "@/lib/db-server";
 import { makeId } from "@/lib/utils";
 
 // GET /api/auth/oauth/github  → starts GitHub OAuth

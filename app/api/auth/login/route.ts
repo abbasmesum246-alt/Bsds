@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { readDB } from "@/lib/db";
+import { readDB } from "@/lib/db-server";
 import { verifyPassword, createSessionToken, toSafeUser, COOKIE_OPTS, COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(req: Request) {

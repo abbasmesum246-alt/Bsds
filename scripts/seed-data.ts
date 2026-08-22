@@ -93,7 +93,7 @@ function makeUser(): User {
   return {
     id: "usr_demo",
     name: "Alex Morgan",
-    email: "demo@bsds.app",
+    email: "demo@bsd.app",
     passwordHash: "$2a$10$aUrCQiaaGs5WXfqFVzCrYOzgzx6Uu1vP/A.OwVvwvTj8VkCZmfbGG",
     company: "Morgan Commerce Co.",
     avatarColor: "#3563ff",

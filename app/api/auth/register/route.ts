@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { readDB, writeDB } from "@/lib/db";
+import { readDB, writeDB } from "@/lib/db-server";
 import { hashPassword, createSessionToken, toSafeUser, pickAvatarColor, COOKIE_OPTS, COOKIE_NAME } from "@/lib/auth";
 import { makeId } from "@/lib/utils";
 

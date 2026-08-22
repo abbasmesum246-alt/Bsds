@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDB, writeDB } from "@/lib/db";
+import { readDB, writeDB } from "@/lib/db-server";
 import { requireUser, badRequest } from "@/lib/api-helpers";
 import { makeId } from "@/lib/utils";
 import type { Product, ProductStatus } from "@/lib/types";

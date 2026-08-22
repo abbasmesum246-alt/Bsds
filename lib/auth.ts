@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { cookies } from "next/headers";
-import { readDB, writeDB } from "./db";
+import { readDB, writeDB } from "./db-server";
 import type { SafeUser, User } from "./types";
 
 const COOKIE = "bsds_session";

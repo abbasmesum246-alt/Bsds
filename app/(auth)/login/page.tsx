@@ -20,6 +20,8 @@ export default function LoginPage() {
   const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
   const [oauthError, setOauthError] = React.useState<string | null>(null);
 
+  const [demoLoading, setDemoLoading] = React.useState(false);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null); setLoading(true);
@@ -33,9 +35,15 @@ export default function LoginPage() {
     }
   }
 
-  function startDemo() {
-    setEmail("demo@bsd.app"); setPassword("password123");
-    setTimeout(() => (document.getElementById("email-form") as HTMLFormElement | null)?.requestSubmit(), 100);
+  async function startDemo() {
+    setDemoLoading(true); setError(null);
+    try {
+      await login("demo@bsd.app", "password123");
+      window.location.href = "/dashboard";
+    } catch (err) {
+      setError((err as Error).message || "Demo login failed");
+      setDemoLoading(false);
+    }
   }
 
   function startOAuth(provider: "github" | "google") {
@@ -126,8 +134,9 @@ export default function LoginPage() {
       )}
 
       <div className="mt-5">
-        <button onClick={startDemo} className="w-full h-11 rounded-xl border-2 border-dashed border-indigo-300 bg-indigo-50/40 hover:bg-indigo-50 hover:border-indigo-400 text-indigo-700 font-bold text-sm flex items-center justify-center gap-2 transition">
-          <PlayCircle className="h-4 w-4" /> Try the live demo (no sign-up)
+        <button onClick={startDemo} disabled={demoLoading}
+          className="btn-premium w-full h-12 text-base disabled:opacity-70">
+          {demoLoading ? <><Loader2 className="h-5 w-5 animate-spin" />Entering demo…</> : <><PlayCircle className="h-5 w-5" /> Try the live demo — no sign-up</>}
         </button>
       </div>
 
