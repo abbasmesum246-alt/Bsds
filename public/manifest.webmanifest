@@ -1,13 +1,13 @@
 {
-  "name": "BSDS — Dropshipping Automation",
-  "short_name": "BSDS",
-  "description": "Automate product imports, order fulfillment, price & stock monitoring across all your stores.",
+  "name": "BSD — Business Scientist Design",
+  "short_name": "BSD",
+  "description": "All-in-one dropshipping & affiliate platform. Import products, fulfill orders, track commissions, and grow with AI — one command center.",
   "start_url": "/dashboard?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f6f7f9",
-  "theme_color": "#1d40f5",
+  "background_color": "#f6f7fb",
+  "theme_color": "#4f46e5",
   "categories": ["business", "productivity", "shopping"],
   "lang": "en",
   "icons": [

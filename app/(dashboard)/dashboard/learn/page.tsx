@@ -54,10 +54,19 @@ export default function LearnPage() {
   const [active, setActive] = React.useState<Category | null>(null);
 
   React.useEffect(() => {
-    fetch("/api/affiliate/categories").then((r) => r.json()).then((d) => {
-      setCategories(d.categories);
-      setActive(d.categories[0]);
-    });
+    let alive = true;
+    fetch("/api/affiliate/categories")
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("Failed to load"))))
+      .then((d) => {
+        if (!alive) return;
+        const list: Category[] = Array.isArray(d?.categories) ? d.categories : [];
+        setCategories(list);
+        setActive(list[0] ?? null);
+      })
+      .catch(() => {
+        if (alive) { setCategories([]); setActive(null); }
+      });
+    return () => { alive = false; };
   }, []);
 
   return (
@@ -150,17 +159,17 @@ export default function LearnPage() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm font-bold mb-2 flex items-center gap-1.5 text-emerald-700"><CheckCircle2 className="h-4 w-4" />Pros</p>
-                    <ul className="space-y-1.5">{active.pros.map((p, i) => <li key={i} className="text-xs text-ink-700 flex gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />{p}</li>)}</ul>
+                    <ul className="space-y-1.5">{(active.pros || []).map((p, i) => <li key={i} className="text-xs text-ink-700 flex gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />{p}</li>)}</ul>
                   </div>
                   <div>
                     <p className="text-sm font-bold mb-2 flex items-center gap-1.5 text-red-700"><AlertTriangle className="h-4 w-4" />Cons</p>
-                    <ul className="space-y-1.5">{active.cons.map((c, i) => <li key={i} className="text-xs text-ink-700 flex gap-2"><AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />{c}</li>)}</ul>
+                    <ul className="space-y-1.5">{(active.cons || []).map((c, i) => <li key={i} className="text-xs text-ink-700 flex gap-2"><AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />{c}</li>)}</ul>
                   </div>
                 </div>
 
                 <div>
                   <p className="text-sm font-bold mb-2 flex items-center gap-1.5"><Target className="h-4 w-4 text-brand-600" />Roadmap</p>
-                  <ol className="space-y-2">{active.roadmap.map((r, i) => (
+                  <ol className="space-y-2">{(active.roadmap || []).map((r, i) => (
                     <li key={i} className="flex gap-3 text-xs">
                       <span className="h-5 w-5 shrink-0 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold flex items-center justify-center">{i + 1}</span>
                       <span className="text-ink-700 pt-0.5">{r}</span>
@@ -171,7 +180,7 @@ export default function LearnPage() {
                 <div>
                   <p className="text-sm font-bold mb-2">Top strategies</p>
                   <div className="space-y-3">
-                    {active.strategies.map((s, i) => (
+                    {(active.strategies || []).map((s, i) => (
                       <div key={i} className="rounded-xl border border-ink-100 p-3">
                         <p className="font-semibold text-sm">{s.title}</p>
                         <ol className="mt-2 space-y-1">{s.steps.map((step, j) => (
@@ -187,21 +196,21 @@ export default function LearnPage() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-ink-400 mb-2">Best platforms</p>
-                    <div className="space-y-1.5">{active.bestPlatforms.map((b, i) => (
+                    <div className="space-y-1.5">{(active.bestPlatforms || []).map((b, i) => (
                       <div key={i} className="text-xs bg-ink-50 rounded-lg p-2"><strong>{b.name}:</strong> <span className="text-ink-600">{b.why}</span></div>
                     ))}</div>
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-ink-400 mb-2">Content formats</p>
-                    <div className="flex flex-wrap gap-1.5">{active.contentFormats.map((f) => <Badge key={f} tone="gray">{f}</Badge>)}</div>
+                    <div className="flex flex-wrap gap-1.5">{(active.contentFormats || []).map((f) => <Badge key={f} tone="gray">{f}</Badge>)}</div>
                     <p className="text-xs font-bold uppercase tracking-wider text-ink-400 mt-3 mb-2">Skills needed</p>
-                    <div className="flex flex-wrap gap-1.5">{active.skillsNeeded.map((s) => <span key={s} className="text-[11px] px-2 py-0.5 rounded bg-brand-50 text-brand-700">{s}</span>)}</div>
+                    <div className="flex flex-wrap gap-1.5">{(active.skillsNeeded || []).map((s) => <span key={s} className="text-[11px] px-2 py-0.5 rounded bg-brand-50 text-brand-700">{s}</span>)}</div>
                   </div>
                 </div>
 
                 <div className="rounded-xl border border-red-100 bg-red-50 p-3">
                   <p className="text-xs font-bold text-red-800 mb-1.5 flex items-center gap-1"><AlertTriangle className="h-3.5 w-3.5" />Common pitfalls to avoid</p>
-                  <ul className="space-y-1">{active.pitfalls.map((p, i) => <li key={i} className="text-xs text-red-900 flex gap-2"><span>•</span>{p}</li>)}</ul>
+                  <ul className="space-y-1">{(active.pitfalls || []).map((p, i) => <li key={i} className="text-xs text-red-900 flex gap-2"><span>•</span>{p}</li>)}</ul>
                 </div>
               </div>
             </div>

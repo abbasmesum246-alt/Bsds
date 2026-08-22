@@ -45,14 +45,23 @@ export async function POST(req: Request) {
     }
   }
 
-  // Auto-test every affected service and persist the result
+  // Auto-test every affected service. The key is ALREADY SAVED above;
+  // a failed/timeout test must never roll that back or error the request.
   const results: Record<string, { ok: boolean; message: string }> = {};
   for (const svc of affected) {
     const tester = TESTERS[svc];
-    if (tester) {
-      const r = await tester();
+    if (!tester) continue;
+    try {
+      const r = await Promise.race([
+        tester(),
+        new Promise<{ ok: boolean; message: string }>((res) =>
+          setTimeout(() => res({ ok: false, message: "Test timed out — key saved, tap Test to retry." }), 8000)
+        ),
+      ]);
       results[svc] = { ok: r.ok, message: r.message };
-      upsertConnection(auth.user.id, svc, r);
+      try { upsertConnection(auth.user.id, svc, r); } catch { /* status record is non-critical */ }
+    } catch {
+      results[svc] = { ok: false, message: "Saved, but the live test failed. Tap Test to retry." };
     }
   }
 

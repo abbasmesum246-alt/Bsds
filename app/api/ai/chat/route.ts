@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { secrets } from "@/lib/db-server";
 import { requireUser } from "@/lib/auth-helpers";
 import { TOOLS, callTool } from "@/lib/ai/tools";
+import { localAI } from "@/lib/ai/local-engine";
 import type { SafeUser } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
@@ -24,12 +25,27 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const messages: Msg[] = Array.isArray(body.messages) ? body.messages : [];
 
+  const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content || "";
   const apiKey = secrets.get("GROQ_API_KEY") || secrets.get("OPENAI_API_KEY");
+
+  // Built-in AI engine — works with ZERO keys. Streams a plain-text answer.
   if (!apiKey) {
-    return NextResponse.json(
-      { error: "NO_AI_KEY", message: "Add a free Groq API key in Settings → Integrations to enable the AI. Get one free at console.groq.com/keys." },
-      { status: 400 }
-    );
+    const answer = localAI(typeof lastUser === "string" ? lastUser : "", user);
+    const stream = new ReadableStream({
+      start(controller) {
+        const enc = new TextEncoder();
+        // chunk by sentence so the typing effect feels natural
+        const chunks = answer.match(/[^.!?\n]+[.!?\n]*|\n/g) || [answer];
+        let i = 0;
+        const tick = () => {
+          if (i >= chunks.length) { controller.close(); return; }
+          controller.enqueue(enc.encode(chunks[i++]));
+          setTimeout(tick, 28);
+        };
+        tick();
+      },
+    });
+    return new Response(stream, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
   }
 
   const useGroq = Boolean(secrets.get("GROQ_API_KEY"));

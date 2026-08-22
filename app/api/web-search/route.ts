@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { secrets } from "@/lib/db-server";
 import { requireUser } from "@/lib/api-helpers";
+import { curatedSearch } from "@/lib/web/curated";
 
 export const dynamic = "force-dynamic";
 
-// Optional live web search for real-time supplier news/reviews.
-// Add a free RAPIDAPI_KEY from https://rapidapi.com (search "google-search1")
-// in Settings → Integrations to enable. If no key, returns a friendly empty state.
+// Web search. Uses a live RapidAPI Google Search key if one is saved;
+// otherwise falls back to a curated, always-available list of trusted links.
 export async function GET(req: Request) {
   const auth = requireUser();
   if ("response" in auth) return auth.response;
@@ -16,9 +16,10 @@ export async function GET(req: Request) {
   const key = secrets.get("RAPIDAPI_KEY");
   if (!key) {
     return NextResponse.json({
-      enabled: false,
-      results: [],
-      message: "Add a free RapidAPI key in Settings → Integrations for live web results.",
+      enabled: true,
+      curated: true,
+      results: curatedSearch(q),
+      message: "Showing trusted curated results. Add a free RapidAPI key in Integrations for live search.",
     });
   }
 

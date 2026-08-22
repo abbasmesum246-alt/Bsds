@@ -8,9 +8,18 @@ export const metadata: Metadata = {
     "All-in-one dropshipping & affiliate platform. Import products, fulfill orders, track commissions, and grow with AI — one command center.",
   applicationName: "BSD",
   appleWebApp: { capable: true, title: "BSD", statusBarStyle: "default" },
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.svg",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.svg", sizes: "any", type: "image/svg+xml" },
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 

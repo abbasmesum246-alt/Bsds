@@ -1,4 +1,4 @@
-import { readDB, writeDB } from "@/lib/db";
+import { readDB, writeDB } from "@/lib/db-server";
 import type { SafeUser } from "@/lib/types";
 import { makeId } from "@/lib/utils";
 
@@ -180,9 +180,12 @@ export const TOOLS: ToolDef[] = [
     },
     run: (args, user) => {
       const ctx = dbFor(user);
-      const o = ctx.db.orders.find(
-        (x) => x.userId === user.id && x.orderNumber.toLowerCase() === String(args.orderNumber).toLowerCase()
-      );
+      const needle = String(args.orderNumber || "").replace(/^#/, "").trim().toLowerCase();
+      const o = ctx.db.orders.find((x) => {
+        if (x.userId !== user.id) return false;
+        const onum = (x.orderNumber || "").replace(/^#/, "").trim().toLowerCase();
+        return onum === needle || onum.endsWith(needle) || x.id.toLowerCase() === needle;
+      });
       if (!o) return { ok: false, message: "Order not found." };
       if (o.status !== "pending") return { ok: false, message: `Order is ${o.status}, not pending — cannot fulfill.` };
       o.status = "shipped";

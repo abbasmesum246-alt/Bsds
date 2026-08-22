@@ -14,10 +14,6 @@ export async function GET(req: Request) {
     return cat ? NextResponse.json(cat) : NextResponse.json({ error: "Not found" }, { status: 404 });
   }
   return NextResponse.json({
-    categories: AFFILIATE_CATEGORIES.map((c) => ({
-      id: c.id, name: c.name, emoji: c.emoji, definition: c.definition,
-      howItWorks: c.howItWorks, commissionRange: c.commissionRange,
-      realisticEarnings: c.realisticEarnings,
-    })),
+    categories: AFFILIATE_CATEGORIES,
   });
 }

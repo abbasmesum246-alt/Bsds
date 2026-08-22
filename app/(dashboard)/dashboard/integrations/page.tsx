@@ -2,7 +2,7 @@
 import * as React from "react";
 import {
   Puzzle, Key, CheckCircle2, XCircle, Loader2, ExternalLink,
-  Bot, Search, ShoppingCart, Sparkles, RefreshCw, AlertCircle, Eye, EyeOff, ShieldCheck,
+  Bot, Search, ShoppingCart, Sparkles, RefreshCw, AlertCircle, Eye, EyeOff, ShieldCheck, Zap,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -72,12 +72,26 @@ export default function IntegrationsPage() {
     <div className="space-y-5 animate-in">
       <PageHeader title="Integrations" description="Connect real services. Keys are encrypted and every connection is actually tested — not just saved." icon={<Puzzle className="h-5 w-5" />} />
 
+      {/* Built-in, works out of the box */}
+      <div className="card-premium p-5 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#4f46e5,#0d9488)" }}>
+        <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/15 blur-xl" />
+        <div className="relative flex items-start gap-3">
+          <div className="h-11 w-11 rounded-xl bg-white/20 ring-1 ring-white/25 flex items-center justify-center shrink-0"><Zap className="h-5 w-5" /></div>
+          <div>
+            <p className="font-extrabold text-base flex items-center gap-2">Ready to use — no keys needed
+              <Badge className="bg-white/20 text-white ring-1 ring-white/25"><CheckCircle2 className="h-3 w-3" /> Built-in</Badge>
+            </p>
+            <p className="text-sm text-white/85 mt-1 leading-relaxed">Your AI assistant, web/best-supplier search, curated offers and supplier directory all work immediately. The optional keys below only add extra power (a smarter cloud AI or fully live search results).</p>
+          </div>
+        </div>
+      </div>
+
       <Card className="border-emerald-200 bg-emerald-50/60">
         <CardContent className="p-4 flex gap-3 text-sm text-emerald-900">
           <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
           <div>
             <p className="font-semibold">Your keys are safe</p>
-            <p className="text-emerald-800/80 text-xs mt-0.5">Keys are encrypted with AES-256 before storage. When you save, BSDS actually pings the service to verify — if it says "Connected", it really is. Add a free Turso database URL in your Vercel env for persistence across deploys.</p>
+            <p className="text-emerald-800/80 text-xs mt-0.5">Keys are encrypted with AES-256 before storage. When you save, BSD actually pings the service to verify — if it says "Connected", it really is. Keys are always optional.</p>
           </div>
         </CardContent>
       </Card>
@@ -86,8 +100,8 @@ export default function IntegrationsPage() {
       <IntegrationCard
         service="groq"
         icon={<Bot className="h-5 w-5" />}
-        title="AI Assistant (Groq) — Recommended"
-        subtitle="Powers the BSDS AI with fast, free Llama models."
+        title="AI Assistant — built-in ✓ (upgrade with Groq)"
+        subtitle="Works right now. Add a free Groq key for a smarter, web-aware cloud model."
         color="from-blue-500 to-indigo-600"
         hasKey={has.GROQ_API_KEY}
         status={svc("groq")}
@@ -98,6 +112,7 @@ export default function IntegrationsPage() {
         saving={saving === "groq"} testing={testing === "groq"}
         onSave={(payload) => save("groq", payload)}
         onTest={() => test("groq")}
+        builtIn="Active"
         instructions={[
           "Go to console.groq.com/keys (free, no credit card)",
           "Sign in and click 'Create API Key'",
@@ -138,6 +153,7 @@ export default function IntegrationsPage() {
         saving={saving === "rapidapi"} testing={testing === "rapidapi"}
         onSave={(payload) => save("rapidapi", payload)}
         onTest={() => test("rapidapi")}
+        builtIn="Curated results"
         instructions={[
           "Create a free RapidAPI account",
           "Search for 'google-search1' and subscribe (free tier = 100 req/day)",
@@ -201,14 +217,14 @@ interface FieldDef { key: string; label: string; placeholder: string; password?:
 
 function IntegrationCard({
   icon, title, subtitle, color, hasKey, status, fields, form, setForm, show, setShow,
-  saving, testing, onSave, onTest, instructions,
+  saving, testing, onSave, onTest, instructions, builtIn,
 }: {
   service: string; icon: React.ReactNode; title: string; subtitle: string; color: string;
   hasKey?: boolean; status?: ServiceStatus; fields: FieldDef[];
   form: Record<string, string>; setForm: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   show: Record<string, boolean>; setShow: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
   saving: boolean; testing: boolean; onSave: (payload: Record<string, string>) => void; onTest: () => void;
-  instructions?: string[];
+  instructions?: string[]; builtIn?: string;
 }) {
   const [expanded, setExpanded] = React.useState(false);
   const canSave = fields.some((f) => (form[f.key] || "").trim().length > 0);
@@ -224,6 +240,7 @@ function IntegrationCard({
                 status.ok ? <Badge tone="green" className="gap-1"><CheckCircle2 className="h-3 w-3" />Connected</Badge>
                   : <Badge tone="red" className="gap-1"><XCircle className="h-3 w-3" />Failed</Badge>
               ) : hasKey ? <Badge tone="yellow" className="gap-1"><AlertCircle className="h-3 w-3" />Saved, not tested</Badge>
+                : builtIn ? <Badge tone="green" className="gap-1"><CheckCircle2 className="h-3 w-3" />{builtIn}</Badge>
                 : <Badge tone="gray">Not connected</Badge>}
             </CardTitle>
             <CardDescription>{subtitle}</CardDescription>

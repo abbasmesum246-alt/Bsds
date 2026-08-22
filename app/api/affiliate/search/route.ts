@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { secrets } from "@/lib/db-server";
 import { requireUser } from "@/lib/auth-helpers";
+import { curatedSearch } from "@/lib/web/curated";
 
 export const dynamic = "force-dynamic";
 
-// Real-time web search for affiliate opportunities, trends, and rates.
-// Uses RapidAPI Google Search (free tier). Returns empty state if no key.
+// Real-time web search for affiliate opportunities. Uses RapidAPI if a key
+// is saved; otherwise returns a curated set of trusted programs/networks.
 export async function GET(req: Request) {
   const auth = requireUser(req);
   if ("response" in auth) return auth.response;
@@ -15,9 +16,10 @@ export async function GET(req: Request) {
   const key = secrets.get("RAPIDAPI_KEY");
   if (!key) {
     return NextResponse.json({
-      enabled: false,
-      results: [],
-      message: "Add a free RapidAPI key in Integrations for real-time web search.",
+      enabled: true,
+      curated: true,
+      results: curatedSearch(q),
+      message: "Showing curated programs. Add a free RapidAPI key in Integrations for live search.",
     });
   }
 
