@@ -2,14 +2,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * BSD monogram logo.
+ * BSD premium monogram.
  *
- * Meaning:
- *  - The outer rounded square = a "system" / framework (Business)
- *  - The angled cut through the middle = Analytics / Science (a chart line rising)
- *  - The two interlocking shapes below = Design (craft & structure)
- *  - Indigo (trust/intelligence) fading into Teal (growth/money)
- *  - The negative-space gap forms an upward arrow — growth by design
+ * Design: An abstract "B" formed by two flowing shapes that meet at a
+ * precise center point — representing Business (structure, left) meeting
+ * Science + Design (creativity/analysis, right). The negative space forms
+ * a subtle diamond/gem shape — value created at the intersection.
+ *
+ * Gradient: indigo (intelligence/trust) → teal (growth/money).
  */
 export function LogoMark({ size = 36, className }: { size?: number; className?: string }) {
   return (
@@ -24,61 +24,58 @@ export function LogoMark({ size = 36, className }: { size?: number; className?: 
       role="img"
     >
       <defs>
-        <linearGradient id="bsdg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+        <linearGradient id="bsdg" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#4f46e5" />
           <stop offset="55%" stopColor="#4338ca" />
           <stop offset="100%" stopColor="#0d9488" />
         </linearGradient>
-        <linearGradient id="bsdg2" x1="24" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#14b8a6" />
+        <linearGradient id="bsdg2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0.7" />
         </linearGradient>
       </defs>
 
-      {/* Rounded system square */}
-      <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#bsdg)" />
+      {/* Rounded tile */}
+      <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#bsdg)" />
 
-      {/* Upward chart/arrow in negative space (Science + growth) */}
-      <path
-        d="M11 34 L20 25 L26 30 L37 17"
-        stroke="white"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-        opacity="0.95"
-      />
-      <circle cx="37" cy="17" r="2.6" fill="white" />
+      {/* Subtle top sheen */}
+      <rect x="2" y="2" width="44" height="22" rx="13" fill="white" opacity="0.06" />
 
-      {/* BSD letterform — subtle in the lower band (Design) */}
-      <text
-        x="24"
-        y="42"
-        textAnchor="middle"
-        fontFamily="system-ui, -apple-system, Segoe UI, sans-serif"
-        fontSize="7.5"
-        fontWeight="800"
-        letterSpacing="1.2"
-        fill="white"
-        opacity="0.92"
-      >
-        BSD
-      </text>
+      {/* Abstract "B" — two rounded lobes sharing a spine */}
+      <g fill="url(#bsdg2)">
+        {/* Upper bowl */}
+        <path d="M18 12
+                 H27.5
+                 C30.5 12 32.5 14 32.5 16.8
+                 C32.5 19.5 30.5 21.3 28 21.3
+                 H18 Z" />
+        {/* Lower bowl */}
+        <path d="M18 22
+                 H29
+                 C32.3 22 34.5 24.2 34.5 27.2
+                 C34.5 30.3 32.2 32.5 29 32.5
+                 H18 Z" />
+        {/* Spine */}
+        <rect x="15.5" y="11.5" width="3.2" height="21.5" rx="1.6" />
+      </g>
+
+      {/* Gem/diamond accent in the negative space (the intersection) */}
+      <path d="M23.5 21.3 L25.5 22 L23.5 22.7 L21.5 22 Z" fill="#a7f3d0" opacity="0.9" />
     </svg>
   );
 }
 
-/** Full wordmark: logo mark + "BUSINESS SCIENTIST DESIGN" */
 export function Wordmark({ size = 36, showTagline = true, className }: { size?: number; showTagline?: boolean; className?: string }) {
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
       <LogoMark size={size} />
       <div className="leading-none">
-        <p className="font-extrabold text-ink-900 text-[15px] tracking-tight">
-          BSD<span className="text-indigo-600">.</span>
+        <p className="font-extrabold text-slate-900 text-[15px] tracking-tight flex items-baseline gap-1">
+          BSD
+          <span className="text-indigo-600">.</span>
         </p>
         {showTagline && (
-          <p className="text-[8.5px] uppercase tracking-[0.22em] font-bold text-slate-400 mt-0.5">
+          <p className="text-[8.5px] uppercase tracking-[0.2em] font-bold text-slate-400 mt-1">
             Business · Scientist · Design
           </p>
         )}

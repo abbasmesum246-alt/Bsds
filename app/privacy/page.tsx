@@ -29,9 +29,9 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold mt-6">4. Sharing</h2>
         <p className="mt-2 text-ink-600">We do not sell personal data. We share data only with the sales channels and suppliers you explicitly connect.</p>
         <h2 className="text-xl font-semibold mt-6">5. Your rights</h2>
-        <p className="mt-2 text-ink-600">You can access, correct, export or delete your data from Settings, or by emailing privacy@bsds.app.</p>
+        <p className="mt-2 text-ink-600">You can access, correct, export or delete your data from Settings, or by emailing privacy@bsd.app.</p>
         <h2 className="text-xl font-semibold mt-6">6. Contact</h2>
-        <p className="mt-2 text-ink-600">Questions? Email <a href="mailto:privacy@bsds.app" className="text-brand-600">privacy@bsds.app</a>.</p>
+        <p className="mt-2 text-ink-600">Questions? Email <a href="mailto:privacy@bsd.app" className="text-brand-600">privacy@bsd.app</a>.</p>
       </main>
     </div>
   );

@@ -11,7 +11,7 @@ import { Loader2, ArrowRight, Sparkles, ShieldCheck, Zap, Eye, EyeOff, Mail, Pla
 export default function LoginPage() {
   const { login } = useAuth();
   const toast = useToast();
-  const [email, setEmail] = React.useState("demo@bsds.app");
+  const [email, setEmail] = React.useState("demo@bsd.app");
   const [password, setPassword] = React.useState("password123");
   const [show, setShow] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -34,7 +34,7 @@ export default function LoginPage() {
   }
 
   function startDemo() {
-    setEmail("demo@bsds.app"); setPassword("password123");
+    setEmail("demo@bsd.app"); setPassword("password123");
     setTimeout(() => (document.getElementById("email-form") as HTMLFormElement | null)?.requestSubmit(), 100);
   }
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth-helpers";
-import { db } from "@/lib/db";
+import { db } from "@/lib/db-server";
 import { makeId } from "@/lib/utils";
 import type { Campaign } from "@/lib/affiliate/types";
 
@@ -37,7 +37,7 @@ const DEMO_CAMPAIGNS: Campaign[] = (() => {
     return {
       id: `vc_${i}`, offerId: `o_${i}`, offerTitle: `${brand} — top deal`, brand,
       platform: platforms[i % platforms.length], status: i % 4 === 0 ? "paused" : "active",
-      link: `https://demo.bsds.app/ref/${brand.toLowerCase()}?ref=demo`,
+      link: `https://demo.bsd.app/ref/${brand.toLowerCase()}?ref=demo`,
       clicks, conversions, revenue, spend: Math.round(clicks * 0.2 * 100) / 100,
       startDate: new Date(Date.now() - (30 - i * 2) * 86400000).toISOString(),
       notes: "Virtual campaign for practice.",

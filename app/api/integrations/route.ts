@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { secrets, db } from "@/lib/db";
+import { secrets, db } from "@/lib/db-server";
 import { TESTERS } from "@/lib/integrations/testers";
 import { requireUser } from "@/lib/auth-helpers";
 

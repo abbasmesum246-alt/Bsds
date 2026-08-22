@@ -1,7 +1,7 @@
 // Real connection testers. Each actually pings the service and returns
 // { ok, message, meta } so the UI can show "verified" — not fake "connected".
 
-import { secrets } from "@/lib/db";
+import { secrets } from "@/lib/db-server";
 
 export interface TestResult {
   ok: boolean;

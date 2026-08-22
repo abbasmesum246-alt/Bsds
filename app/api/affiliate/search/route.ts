@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { secrets } from "@/lib/db";
+import { secrets } from "@/lib/db-server";
 import { requireUser } from "@/lib/auth-helpers";
 
 export const dynamic = "force-dynamic";

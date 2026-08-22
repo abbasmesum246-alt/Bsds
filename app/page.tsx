@@ -53,7 +53,7 @@ export default function LandingPage() {
             <Link href="/register" className="inline-flex items-center gap-2 rounded-lg bg-brand-600 text-white px-6 py-3 text-base font-semibold hover:bg-brand-700">Start free — no card <ArrowRight className="h-4 w-4" /></Link>
             <Link href="/login" className="inline-flex items-center rounded-lg bg-white border border-ink-200 px-6 py-3 text-base font-semibold text-ink-700 hover:bg-ink-50">View live demo</Link>
           </div>
-          <p className="mt-6 text-xs text-ink-500">Demo: <span className="font-mono font-semibold">demo@bsds.app</span> / <span className="font-mono font-semibold">password123</span></p>
+          <p className="mt-6 text-xs text-ink-500">Demo: <span className="font-mono font-semibold">demo@bsd.app</span> / <span className="font-mono font-semibold">password123</span></p>
 
           <div className="mt-16 max-w-5xl mx-auto rounded-2xl shadow-pop ring-1 ring-ink-100 bg-white p-2">
             <div className="rounded-xl bg-gradient-to-br from-ink-50 to-white p-6 md:p-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">

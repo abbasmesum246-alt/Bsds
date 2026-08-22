@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readDB, writeDB } from "@/lib/db";
+import { readDB, writeDB } from "@/lib/db-server";
 import { buildSeed } from "@/scripts/seed-data";
 
 export async function POST() {

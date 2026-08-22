@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { secrets } from "@/lib/db";
+import { secrets } from "@/lib/db-server";
 import { requireUser } from "@/lib/auth-helpers";
 import { TOOLS, callTool } from "@/lib/ai/tools";
 import type { SafeUser } from "@/lib/types";
