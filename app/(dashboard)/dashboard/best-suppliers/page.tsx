@@ -249,7 +249,7 @@ function SupplierCard({ s, rank }: { s: Supplier; rank: number }) {
               </div>
             </div>
             <a href={s.url} target="_blank" rel="noreferrer"
-              className="block w-full text-center rounded-xl bg-[linear-gradient(135deg,#2547f7,#7c3aed)] text-white text-sm font-semibold py-2.5 hover:opacity-90 transition">
+              className="block w-full text-center rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] text-white text-sm font-semibold py-2.5 hover:opacity-90 transition">
               Visit {s.name} →
             </a>
           </div>

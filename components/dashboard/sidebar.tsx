@@ -63,7 +63,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
       {/* Logo */}
       <div className="h-16 flex items-center justify-between px-5 border-b border-ink-100/80">
         <Link href="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#2547f7,#7c3aed)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)] group-hover:scale-105 transition">B</div>
+          <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)] group-hover:scale-105 transition">B</div>
           <div>
             <p className="font-extrabold text-ink-900 leading-tight">BSDS</p>
             <p className="text-[9px] uppercase tracking-[0.18em] text-ink-400 font-bold">Business Suite</p>
@@ -121,7 +121,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
 
       {/* Upgrade card */}
       <div className="p-3">
-        <div className="rounded-2xl p-4 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#1d40f5,#7c3aed)" }}>
+        <div className="rounded-2xl p-4 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#4f46e5,#0d9488)" }}>
           <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/15" />
           <div className="relative flex items-center gap-2 mb-1"><Sparkles className="h-4 w-4" /><p className="text-sm font-bold">Upgrade to Pro</p></div>
           <p className="text-[11px] text-white/80 leading-relaxed relative">Unlimited products, real store sync &amp; priority AI.</p>
@@ -134,7 +134,7 @@ export function Sidebar({ open, onClose, pendingOrders }: { open: boolean; onClo
       {/* Profile */}
       <div className="px-3 pb-4">
         <div className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-ink-50 transition group">
-          <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,#2547f7,#7c3aed)] text-white flex items-center justify-center font-bold text-sm shrink-0">
+          <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,#4f46e5,#0d9488)] text-white flex items-center justify-center font-bold text-sm shrink-0">
             {user?.name?.[0]?.toUpperCase() || "A"}
           </div>
           <div className="min-w-0 flex-1">

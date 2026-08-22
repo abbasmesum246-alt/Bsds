@@ -121,7 +121,7 @@ export default function StrategyPage() {
 
       {result && !loading && (
         <>
-          <Card className="border-0 bg-[linear-gradient(135deg,#1d40f5,#7c3aed)] text-white">
+          <Card className="border-0 bg-[linear-gradient(135deg,#4f46e5,#0d9488)] text-white">
             <CardContent className="p-5">
               <p className="text-xs uppercase tracking-widest text-white/70 font-bold">Your strategy summary</p>
               <p className="mt-2 text-lg font-semibold leading-snug">{result.summary}</p>

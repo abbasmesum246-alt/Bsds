@@ -9,7 +9,7 @@ export function StatCard({ label, value, delta, icon, tone = "brand", format = "
 }) {
   const positive = (delta ?? 0) >= 0;
   const tones: Record<string, string> = {
-    brand: "#2547f7", green: "#059669", purple: "#7c3aed", amber: "#d97706", sky: "#0284c7",
+    brand: "#4f46e5", green: "#059669", purple: "#0d9488", amber: "#d97706", sky: "#0284c7",
   };
   const toneColor = tones[tone];
   const display = format === "currency" ? formatCurrency(value, currency)

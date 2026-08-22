@@ -4,22 +4,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Premium indigo → teal brand
         brand: {
-          50: "#eef4ff", 100: "#dae6ff", 200: "#bdd2ff", 300: "#8fb4ff",
-          400: "#5a8bff", 500: "#3563ff", 600: "#1d40f5", 700: "#162fe1",
-          800: "#1829b6", 900: "#1a2a8f", 950: "#141a57",
+          50: "#eef2ff", 100: "#e0e7ff", 200: "#c7d2fe", 300: "#a5b4fc",
+          400: "#818cf8", 500: "#6366f1", 600: "#4f46e5", 700: "#4338ca",
+          800: "#3730a3", 900: "#312e81", 950: "#1e1b4b",
         },
+        // Keep ink as slate for compatibility, mapped to slate tones
         ink: {
-          50: "#f6f7f9", 100: "#eceef2", 200: "#d5d9e2", 300: "#b0b8c8",
-          400: "#8590a8", 500: "#65718c", 600: "#505a73", 700: "#41495d",
-          800: "#383e4f", 900: "#0f1320", 950: "#080a12",
+          50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1",
+          400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155",
+          800: "#1e293b", 900: "#0f172a", 950: "#020617",
         },
       },
-      fontFamily: { sans: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"] },
+      fontFamily: { sans: ["system-ui", "-apple-system", "Segoe UI", "Inter", "sans-serif"] },
       boxShadow: {
-        card: "0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.10)",
-        soft: "0 4px 16px rgba(16,24,40,.06)",
-        pop: "0 12px 32px rgba(16,24,40,.12)",
+        card: "0 1px 2px rgba(15,23,42,.05),0 8px 24px -12px rgba(15,23,42,.12)",
+        soft: "0 4px 16px -4px rgba(15,23,42,.08)",
+        pop: "0 16px 40px -12px rgba(79,70,229,.25)",
       },
       keyframes: {
         "fade-in": { "0%": { opacity: "0", transform: "translateY(4px)" }, "100%": { opacity: "1", transform: "translateY(0)" } },

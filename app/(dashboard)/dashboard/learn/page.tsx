@@ -70,7 +70,7 @@ export default function LearnPage() {
 
       {/* Quick start path */}
       <Card className="border-0 text-white overflow-hidden" >
-        <div className="p-6 bg-[linear-gradient(135deg,#1d40f5,#7c3aed)] relative">
+        <div className="p-6 bg-[linear-gradient(135deg,#4f46e5,#0d9488)] relative">
           <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-white/10" />
           <h2 className="text-xl font-extrabold flex items-center gap-2 relative"><Play className="h-5 w-5" />Your 30-day quick-start path</h2>
           <p className="text-sm text-white/80 mt-1 max-w-2xl relative">Follow these steps in order. By day 30 you'll have a real affiliate system running.</p>

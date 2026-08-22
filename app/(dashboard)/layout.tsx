@@ -37,7 +37,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   }
   return (
     <ModeProvider>
-    <div className="min-h-screen bg-ink-50">
+    <div className="min-h-screen">
       <Sidebar open={open} onClose={() => setOpen(false)} pendingOrders={data?.counts?.pendingOrders} />
       <div className="lg:pl-72">
         <Topbar onMenuClick={() => setOpen(true)} />

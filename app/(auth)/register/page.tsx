@@ -26,7 +26,7 @@ export default function RegisterPage() {
   return (
     <div>
       <div className="lg:hidden flex items-center gap-2 mb-8">
-        <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#2547f7,#7c3aed)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)]">B</div>
+        <div className="h-9 w-9 rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white font-bold shadow-[0_4px_12px_-2px_rgba(29,64,245,0.6)]">B</div>
         <span className="font-bold text-lg text-gradient">BSDS</span>
       </div>
       <h1 className="text-2xl font-bold text-ink-900">Create your account</h1>

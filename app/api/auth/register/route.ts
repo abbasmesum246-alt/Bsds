@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { readDB, writeDB } from "@/lib/db";
-import { hashPassword, createSession, toSafeUser, pickAvatarColor, COOKIE_OPTS, COOKIE_NAME } from "@/lib/auth";
+import { hashPassword, createSessionToken, toSafeUser, pickAvatarColor, COOKIE_OPTS, COOKIE_NAME } from "@/lib/auth";
 import { makeId } from "@/lib/utils";
 
 export async function POST(req: Request) {
@@ -22,8 +22,7 @@ export async function POST(req: Request) {
   db.stores.push({ id: makeId("sto"), userId: user.id, name: "My First Store", platform: "Shopify", url: "mystore.myshopify.com", status: "connected", productsCount: 0, ordersCount: 0, revenue: 0, currency: "USD", connectedAt: now });
   db.suppliers.push({ id: makeId("sup"), userId: user.id, name: "AliExpress Premium", url: "aliexpress.com", category: "General", rating: 4.5, shippingDays: [7, 14], productsCount: 0, autoOrdering: true, connectedAt: now });
   writeDB(db);
-  const token = createSession(user.id);
-  const res = NextResponse.json({ user: toSafeUser(user) });
+  const token = createSessionToken(user.id, user.email);
   cookies().set(COOKIE_NAME, token, COOKIE_OPTS);
-  return res;
+  return NextResponse.json({ user: toSafeUser(user) });
 }

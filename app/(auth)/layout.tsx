@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <AuthProvider>
       <div className="min-h-screen grid lg:grid-cols-2 bg-white">
-        <div className="relative hidden lg:flex flex-col justify-between p-12 text-white overflow-hidden bg-[linear-gradient(135deg,#0a1638_0%,#1d40f5_45%,#7c3aed_100%)]">
+        <div className="relative hidden lg:flex flex-col justify-between p-12 text-white overflow-hidden bg-[linear-gradient(135deg,#0a1638_0%,#4f46e5_45%,#0d9488_100%)]">
           <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-white/10 blur-3xl animate-pulse" />
           <div className="absolute -bottom-40 -left-20 h-[28rem] w-[28rem] rounded-full bg-violet-400/20 blur-3xl" />
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />

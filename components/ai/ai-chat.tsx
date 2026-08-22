@@ -77,23 +77,21 @@ export function AiChat() {
   return (
     <>
       {/* Floating button */}
+      {/* AI launcher is hidden by default — opened from the Quick Dock */}
       <button
         data-ai-launcher
         onClick={() => setOpen((v) => !v)}
-        className={cn(
-          "fixed bottom-5 left-1/2 -translate-x-1/2 z-40 h-14 w-14 rounded-full text-white flex items-center justify-center shadow-[0_12px_32px_-8px_rgba(37,71,247,0.7)] transition-all hover:scale-105",
-          open ? "bg-ink-800 rotate-90" : "bg-[linear-gradient(135deg,#2547f7,#7c3aed)]"
-        )}
-        aria-label="AI assistant"
+        className="hidden"
+        aria-hidden="true"
       >
-        {open ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
+        AI
       </button>
 
       {/* Chat panel */}
       {open && (
         <div className="fixed bottom-24 right-5 z-40 w-[calc(100vw-2.5rem)] sm:w-96 h-[32rem] max-h-[75vh] card flex flex-col overflow-hidden animate-in">
           {/* Header */}
-          <div className="px-4 py-3 text-white flex items-center gap-3" style={{ background: "linear-gradient(135deg,#2547f7,#7c3aed)" }}>
+          <div className="px-4 py-3 text-white flex items-center gap-3" style={{ background: "linear-gradient(135deg,#4f46e5,#0d9488)" }}>
             <div className="h-9 w-9 rounded-full bg-white/20 flex items-center justify-center"><Bot className="h-5 w-5" /></div>
             <div className="flex-1">
               <p className="font-bold text-sm leading-tight">BSDS AI Assistant</p>
@@ -108,13 +106,13 @@ export function AiChat() {
             {messages.map((m, i) => (
               <div key={i} className={cn("flex gap-2", m.role === "user" ? "justify-end" : "justify-start")}>
                 {m.role === "assistant" && (
-                  <div className="h-7 w-7 rounded-full bg-[linear-gradient(135deg,#2547f7,#7c3aed)] flex items-center justify-center text-white shrink-0">
+                  <div className="h-7 w-7 rounded-full bg-[linear-gradient(135deg,#4f46e5,#0d9488)] flex items-center justify-center text-white shrink-0">
                     <Bot className="h-4 w-4" />
                   </div>
                 )}
                 <div className={cn(
                   "max-w-[80%] rounded-2xl px-3.5 py-2 text-sm whitespace-pre-wrap",
-                  m.role === "user" ? "bg-[linear-gradient(135deg,#2547f7,#7c3aed)] text-white rounded-br-sm" : "bg-white border border-ink-100 text-ink-800 rounded-bl-sm shadow-sm"
+                  m.role === "user" ? "bg-[linear-gradient(135deg,#4f46e5,#0d9488)] text-white rounded-br-sm" : "bg-white border border-ink-100 text-ink-800 rounded-bl-sm shadow-sm"
                 )}>
                   {m.content || (loading && <Loader2 className="h-4 w-4 animate-spin text-brand-500" />)}
                 </div>
@@ -151,7 +149,7 @@ export function AiChat() {
               className="flex-1 rounded-xl border border-ink-200 px-3 py-2.5 text-sm focus:border-brand-400 focus:ring-4 focus:ring-brand-100 outline-none"
               disabled={loading}
             />
-            <button type="submit" disabled={loading || !input.trim()} className="h-10 w-10 rounded-xl bg-[linear-gradient(135deg,#2547f7,#7c3aed)] text-white flex items-center justify-center disabled:opacity-50 hover:opacity-90">
+            <button type="submit" disabled={loading || !input.trim()} className="h-10 w-10 rounded-xl bg-[linear-gradient(135deg,#4f46e5,#0d9488)] text-white flex items-center justify-center disabled:opacity-50 hover:opacity-90">
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </button>
           </form>

@@ -122,9 +122,9 @@ export default function CampaignsPage() {
       )}
 
       <div className="grid grid-cols-3 gap-3">
-        <Kpi icon={<MousePointerClick className="h-5 w-5" />} label="Clicks" value={totalClicks.toLocaleString()} tone="#2547f7" />
+        <Kpi icon={<MousePointerClick className="h-5 w-5" />} label="Clicks" value={totalClicks.toLocaleString()} tone="#4f46e5" />
         <Kpi icon={<DollarSign className="h-5 w-5" />} label="Conversions" value={totalConv.toLocaleString()} tone="#10b981" />
-        <Kpi icon={<DollarSign className="h-5 w-5" />} label="Commission" value={formatCurrency(totalRev)} tone="#7c3aed" />
+        <Kpi icon={<DollarSign className="h-5 w-5" />} label="Commission" value={formatCurrency(totalRev)} tone="#0d9488" />
       </div>
 
       {loading ? (

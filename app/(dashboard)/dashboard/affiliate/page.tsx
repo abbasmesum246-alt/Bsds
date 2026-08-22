@@ -100,9 +100,9 @@ export default function AffiliateHub() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">{Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-28" />)}</div>
       ) : stats ? (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <Kpi icon={<MousePointerClick className="h-5 w-5" />} label="Total Clicks" value={stats.totalClicks.toLocaleString()} tone="#2547f7" />
+          <Kpi icon={<MousePointerClick className="h-5 w-5" />} label="Total Clicks" value={stats.totalClicks.toLocaleString()} tone="#4f46e5" />
           <Kpi icon={<Users className="h-5 w-5" />} label="Conversions" value={stats.totalConversions.toLocaleString()} sub={`${stats.conversionRate}% CR`} tone="#10b981" />
-          <Kpi icon={<DollarSign className="h-5 w-5" />} label="Commission" value={formatCurrency(stats.totalRevenue)} sub={`$${stats.epc} EPC`} tone="#7c3aed" />
+          <Kpi icon={<DollarSign className="h-5 w-5" />} label="Commission" value={formatCurrency(stats.totalRevenue)} sub={`$${stats.epc} EPC`} tone="#0d9488" />
           <Kpi icon={<TrendingUp className="h-5 w-5" />} label="ROI" value={`${stats.roi > 0 ? "+" : ""}${stats.roi}%`} sub={`${stats.activeCampaigns} active`} tone={stats.roi >= 0 ? "#10b981" : "#ef4444"} />
         </div>
       ) : null}
@@ -137,7 +137,7 @@ export default function AffiliateHub() {
 
       {/* AI promo */}
       <Card className="overflow-hidden border-0 text-white" >
-        <div className="p-6 bg-[linear-gradient(135deg,#1d40f5,#7c3aed)] relative">
+        <div className="p-6 bg-[linear-gradient(135deg,#4f46e5,#0d9488)] relative">
           <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-white/10" />
           <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-white/5" />
           <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4">

@@ -10,7 +10,7 @@ interface AuthCtx {
   register: (d: { name: string; email: string; password: string; company?: string }) => Promise<SafeUser>;
   logout: () => Promise<void>;
   setUser: (u: SafeUser | null) => void;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<SafeUser | null>;
 }
 const Ctx = React.createContext<AuthCtx | null>(null);
 export function useAuth() {
@@ -27,40 +27,47 @@ export function AuthProvider({ children, initialUser = null }: { children: React
     try {
       const res = await api.get<{ user: SafeUser | null }>("/api/auth/me");
       setUser(res.user);
-    } catch { setUser(null); }
+      return res.user;
+    } catch {
+      setUser(null);
+      return null;
+    }
   }, []);
 
   React.useEffect(() => {
     if (initialUser) { setLoading(false); return; }
     let cancelled = false;
     (async () => {
-      try {
-        const res = await api.get<{ user: SafeUser | null }>("/api/auth/me");
-        if (!cancelled && res.user) setUser(res.user);
-      } catch { /* not signed in */ } finally {
-        if (!cancelled) setLoading(false);
-      }
+      const u = await refresh();
+      if (!cancelled && u) setUser(u);
+      if (!cancelled) setLoading(false);
     })();
     return () => { cancelled = true; };
-  }, [initialUser]);
+  }, [initialUser, refresh]);
 
   const login = React.useCallback(async (email: string, password: string) => {
     setLoading(true);
     try {
       const res = await api.post<{ user: SafeUser }>("/api/auth/login", { email, password });
-      setUser(res.user);
+      // Verify the cookie is actually live before declaring success
+      const me = await refresh();
+      if (!me) {
+        // Cookie didn't take — use the returned user as fallback and retry once
+        setUser(res.user);
+      }
       return res.user;
     } finally { setLoading(false); }
-  }, []);
+  }, [refresh]);
 
   const register = React.useCallback(async (d: { name: string; email: string; password: string; company?: string }) => {
     setLoading(true);
     try {
       const res = await api.post<{ user: SafeUser }>("/api/auth/register", d);
-      setUser(res.user);
+      await refresh();
+      setUser((u) => u || res.user);
       return res.user;
     } finally { setLoading(false); }
-  }, []);
+  }, [refresh]);
 
   const logout = React.useCallback(async () => {
     await api.post("/api/auth/logout");
