@@ -129,7 +129,7 @@ export default function StrategyPage() {
           </Card>
 
           <div>
-            <h3 className="font-bold text-lg mb-3 flex items-center gap-2"><Target className="h-5 w-5 text-brand-600" />Campaign plans</h3>
+            <h3 className="font-bold text-lg mb-3 flex items-center gap-2"><Target className="h-5 w-5 text-violet-600" />Campaign plans</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {result.strategies.map((s) => (
                 <Card key={s.id} className="overflow-hidden">
@@ -145,7 +145,7 @@ export default function StrategyPage() {
                       <p className="text-[10px] uppercase tracking-wider text-ink-400 font-bold mb-1">Hook</p>
                       <p className="text-sm text-ink-700 bg-ink-50 rounded-lg p-2.5 flex gap-2">
                         <span className="flex-1">{s.hook}</span>
-                        <button onClick={() => copy(s.hook, s.id + "-hook")} className="text-ink-400 hover:text-brand-600 shrink-0">
+                        <button onClick={() => copy(s.hook, s.id + "-hook")} className="text-ink-400 hover:text-violet-600 shrink-0">
                           {copied === s.id + "-hook" ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
                         </button>
                       </p>
@@ -157,7 +157,7 @@ export default function StrategyPage() {
                       <div className="rounded-lg bg-ink-50 p-2">
                         <p className="text-[10px] uppercase tracking-wider text-ink-400 font-bold">Expected</p>
                         <p className="font-bold text-ink-900 mt-0.5 flex items-center gap-1">
-                          <MousePointerClick className="h-3 w-3 text-brand-600" />{s.expectedCtr}% CTR
+                          <MousePointerClick className="h-3 w-3 text-violet-600" />{s.expectedCtr}% CTR
                         </p>
                       </div>
                     </div>
@@ -199,7 +199,7 @@ export default function StrategyPage() {
 
           {webResults.length > 0 && (
             <Card>
-              <CardHeader><CardTitle className="flex items-center gap-2"><Search className="h-5 w-5 text-brand-600" />Live web results</CardTitle>
+              <CardHeader><CardTitle className="flex items-center gap-2"><Search className="h-5 w-5 text-violet-600" />Live web results</CardTitle>
                 <CardDescription>Real-time opportunities found on the web.</CardDescription></CardHeader>
               <CardContent className="space-y-3">
                 {webResults.map((r, i) => (

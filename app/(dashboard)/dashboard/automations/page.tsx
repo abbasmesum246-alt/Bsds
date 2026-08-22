@@ -97,7 +97,7 @@ export default function AutomationsPage() {
               <Card key={rule.id} className="p-5 hover:shadow-soft transition">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex items-start gap-3 flex-1 min-w-0">
-                    <div className={cn("h-10 w-10 rounded-xl flex items-center justify-center shrink-0", rule.active ? "bg-brand-50 text-brand-600" : "bg-ink-100 text-ink-400")}><Zap className="h-5 w-5" /></div>
+                    <div className={cn("h-10 w-10 rounded-xl flex items-center justify-center shrink-0", rule.active ? "bg-brand-50 text-violet-600" : "bg-ink-100 text-ink-400")}><Zap className="h-5 w-5" /></div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-semibold text-ink-900">{rule.name}</h3>

@@ -149,7 +149,7 @@ export default function SettingsPage() {
             <Card>
               <CardHeader><CardTitle>Plan &amp; billing</CardTitle><CardDescription>You're on the {currentUser.plan} plan.</CardDescription></CardHeader>
               <CardContent>
-                <div className="rounded-xl bg-gradient-to-br from-brand-600 to-violet-700 p-5 text-white">
+                <div className="rounded-xl bg-gradient-to-br from-violet-600 to-violet-700 p-5 text-white">
                   <div className="flex items-center justify-between">
                     <div><p className="text-sm text-brand-100">Current plan</p><p className="text-2xl font-bold">{currentUser.plan}</p></div>
                     <CreditCard className="h-8 w-8 text-white/60" />
@@ -176,7 +176,7 @@ export default function SettingsPage() {
               <CardHeader><CardTitle>Mobile app</CardTitle><CardDescription>Install BSDS on your phone for notifications and a native experience.</CardDescription></CardHeader>
               <CardContent className="space-y-4">
                 <div className="rounded-xl border border-ink-200 p-4 flex items-center gap-4">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-brand-600 to-violet-600 flex items-center justify-center text-white font-bold text-2xl">B</div>
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl">B</div>
                   <div className="flex-1"><p className="font-semibold">Install on this device</p><p className="text-sm text-ink-500">Adds BSDS to your home screen. Works offline.</p></div>
                   <Button onClick={installApp} disabled={!installEvt} variant={installEvt ? "primary" : "secondary"}><Smartphone className="h-4 w-4" />Install</Button>
                 </div>

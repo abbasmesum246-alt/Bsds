@@ -8,7 +8,7 @@ export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDiv
   return <div className={cn("px-5 pt-5 pb-3", className)} {...props} />;
 }
 export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-base font-extrabold tracking-tight text-ink-900", className)} {...props} />;
+  return <h3 className={cn("text-base font-extrabold tracking-tight text-void-900", className)} {...props} />;
 }
 export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return <p className={cn("text-sm text-ink-500 mt-0.5", className)} {...props} />;

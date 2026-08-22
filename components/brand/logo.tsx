@@ -65,17 +65,16 @@ export function LogoMark({ size = 36, className }: { size?: number; className?: 
   );
 }
 
-export function Wordmark({ size = 36, showTagline = true, className }: { size?: number; showTagline?: boolean; className?: string }) {
+export function Wordmark({ size = 36, showTagline = true, className, dark = false }: { size?: number; showTagline?: boolean; className?: string; dark?: boolean }) {
   return (
     <div className={cn("flex items-center gap-2.5", className)}>
       <LogoMark size={size} />
       <div className="leading-none">
-        <p className="font-extrabold text-slate-900 text-[15px] tracking-tight flex items-baseline gap-1">
-          BSD
-          <span className="text-indigo-600">.</span>
+        <p className={cn("font-extrabold text-[15px] tracking-tight flex items-baseline gap-0.5", dark ? "text-white" : "text-slate-900")}>
+          BSD<span className={dark ? "text-cyan-400" : "text-violet-600"}>.</span>
         </p>
         {showTagline && (
-          <p className="text-[8.5px] uppercase tracking-[0.2em] font-bold text-slate-400 mt-1">
+          <p className={cn("text-[8.5px] uppercase tracking-[0.2em] font-bold mt-1", dark ? "text-slate-400" : "text-slate-400")}>
             Business · Scientist · Design
           </p>
         )}

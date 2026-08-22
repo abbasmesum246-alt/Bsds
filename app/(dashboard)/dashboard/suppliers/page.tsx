@@ -82,7 +82,7 @@ export default function SuppliersPage() {
                   <div className="h-11 w-11 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0"><Truck className="h-5 w-5" /></div>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-ink-900 truncate">{s.name}</h3>
-                    <a href={`https://${s.url}`} target="_blank" rel="noreferrer" className="text-xs text-ink-500 hover:text-brand-600 inline-flex items-center gap-1 truncate"><Globe className="h-3 w-3" />{s.url}<ExternalLink className="h-3 w-3" /></a>
+                    <a href={`https://${s.url}`} target="_blank" rel="noreferrer" className="text-xs text-ink-500 hover:text-violet-600 inline-flex items-center gap-1 truncate"><Globe className="h-3 w-3" />{s.url}<ExternalLink className="h-3 w-3" /></a>
                   </div>
                 </div>
                 <Badge tone="gray">{s.category}</Badge>

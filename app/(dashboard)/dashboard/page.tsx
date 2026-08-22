@@ -28,13 +28,13 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader title="Dashboard" description="Welcome back — here's what's happening across your stores today."
-        action={<Link href="/dashboard/products" className="inline-flex items-center gap-2 rounded-lg bg-brand-600 text-white px-3.5 py-2 text-sm font-medium hover:bg-brand-700"><Package className="h-4 w-4" />Import product</Link>} />
+        action={<Link href="/dashboard/products" className="btn-premium !py-2 !px-3.5 text-sm"><Package className="h-4 w-4" />Import product</Link>} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Revenue (30 days)" value={formatCurrency(data.revenue)} delta={data.revenueDelta} icon={<DollarSign className="h-5 w-5" />} tone="teal" />
         <StatCard label="Orders" value={data.orders} delta={data.ordersDelta} icon={<ShoppingCart className="h-5 w-5" />} tone="indigo" />
         <StatCard label="Net profit" value={formatCurrency(data.profit)} delta={data.profitDelta} icon={<TrendingUp className="h-5 w-5" />} tone="violet" />
-        <StatCard label="Active products" value={data.products} delta={data.productsDelta} icon={<Package className="h-5 w-5" />} tone="sky" />
+        <StatCard label="Active products" value={data.products} delta={data.productsDelta} icon={<Package className="h-5 w-5" />} tone="cyan" />
       </div>
 
       {(data.counts.pendingOrders > 0 || data.counts.lowStock > 0 || data.counts.outOfStock > 0) && (
@@ -55,7 +55,10 @@ export default function DashboardPage() {
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data.revenueSeries} margin={{ top: 5, right: 8, left: -16, bottom: 0 }}>
-                  <defs><linearGradient id="rev" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#3563ff" stopOpacity={0.35} /><stop offset="100%" stopColor="#3563ff" stopOpacity={0} /></linearGradient></defs>
+                  <defs>
+                    <linearGradient id="rev" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#7c3aed" stopOpacity={0.45} /><stop offset="100%" stopColor="#06b6d4" stopOpacity={0.02} /></linearGradient>
+                    <linearGradient id="revLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#7c3aed" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient>
+                  </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#eceef2" vertical={false} />
                   <XAxis dataKey="date" tickFormatter={(v) => new Date(v).toLocaleDateString("en-US", { month: "short", day: "numeric" })} tick={{ fontSize: 12, fill: "#8590a8" }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize: 12, fill: "#8590a8" }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}`} />
@@ -103,7 +106,7 @@ export default function DashboardPage() {
         <Card className="lg:col-span-2">
           <CardHeader className="flex flex-row items-center justify-between">
             <div><CardTitle>Top products</CardTitle><p className="text-sm text-ink-500 mt-0.5">By revenue, last 90 days</p></div>
-            <Link href="/dashboard/products" className="text-sm text-brand-600 hover:underline inline-flex items-center gap-1">View all <ArrowRight className="h-3.5 w-3.5" /></Link>
+            <Link href="/dashboard/products" className="text-sm text-violet-600 hover:underline inline-flex items-center gap-1">View all <ArrowRight className="h-3.5 w-3.5" /></Link>
           </CardHeader>
           <CardContent className="p-0">
             {data.topProducts.length === 0 ? <EmptyState compact icon={<Package className="h-6 w-6" />} title="No product sales yet" /> : (
@@ -135,7 +138,9 @@ export default function DashboardPage() {
                     <XAxis type="number" hide />
                     <YAxis type="category" dataKey="name" width={110} tick={{ fontSize: 12, fill: "#65718c" }} axisLine={false} tickLine={false} />
                     <Tooltip formatter={(v: number) => formatCurrency(v)} cursor={{ fill: "#f6f7f9" }} />
-                    <Bar dataKey="revenue" fill="#3563ff" radius={[0, 6, 6, 0]} barSize={18} />
+                    <Bar dataKey="revenue" fill="url(#barGrad)" radius={[0, 6, 6, 0]} barSize={18}>
+                      <defs><linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#7c3aed" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>

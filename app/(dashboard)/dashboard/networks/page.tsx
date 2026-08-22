@@ -67,9 +67,9 @@ export default function NetworksPage() {
             <option value="merchants">🏪 Most merchants</option>
             <option value="easiest">✅ Easiest approval</option>
           </select>
-          <button onClick={() => setCategory("")} className={cn("text-xs px-2.5 py-1.5 rounded-full font-medium", !category ? "bg-brand-600 text-white" : "bg-ink-100 hover:bg-ink-200")}>All</button>
+          <button onClick={() => setCategory("")} className={cn("text-xs px-2.5 py-1.5 rounded-full font-medium", !category ? "bg-violet-600 text-white" : "bg-ink-100 hover:bg-ink-200")}>All</button>
           {facets.map((c) => (
-            <button key={c} onClick={() => setCategory(category === c ? "" : c)} className={cn("text-xs px-2.5 py-1.5 rounded-full font-medium capitalize", category === c ? "bg-brand-600 text-white" : "bg-ink-100 hover:bg-ink-200")}>{c}</button>
+            <button key={c} onClick={() => setCategory(category === c ? "" : c)} className={cn("text-xs px-2.5 py-1.5 rounded-full font-medium capitalize", category === c ? "bg-violet-600 text-white" : "bg-ink-100 hover:bg-ink-200")}>{c}</button>
           ))}
         </div>
       </Card>
@@ -104,7 +104,7 @@ function NetworkCard({ n }: { n: Network }) {
               <h3 className="font-bold text-ink-900 truncate">{n.name}</h3>
               <Badge tone="gray" className="capitalize">{n.category}</Badge>
             </div>
-            <a href={n.url} target="_blank" rel="noreferrer" className="text-xs text-brand-600 hover:underline inline-flex items-center gap-1 mt-0.5">
+            <a href={n.url} target="_blank" rel="noreferrer" className="text-xs text-violet-600 hover:underline inline-flex items-center gap-1 mt-0.5">
               {n.url.replace(/^https?:\/\//, "")}<ExternalLink className="h-3 w-3" />
             </a>
           </div>
@@ -125,7 +125,7 @@ function NetworkCard({ n }: { n: Network }) {
 
         <p className="mt-3 text-xs italic text-ink-500">Best for: {n.bestFor}</p>
 
-        <button onClick={() => setExpanded((v) => !v)} className="mt-3 w-full text-xs font-bold text-brand-600">
+        <button onClick={() => setExpanded((v) => !v)} className="mt-3 w-full text-xs font-bold text-violet-600">
           {expanded ? "Hide details ▲" : "See pros, cons & payout ▼"}
         </button>
 

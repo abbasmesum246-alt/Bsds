@@ -63,7 +63,7 @@ export default function OrdersPage() {
       <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
         {tabs.map(([v, l]) => (
           <button key={v} onClick={() => setStatusFilter(v)}
-            className={cn("px-3.5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition", statusFilter === v ? "bg-brand-600 text-white" : "bg-white border border-ink-200 text-ink-600 hover:bg-ink-50")}>
+            className={cn("px-3.5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition", statusFilter === v ? "bg-violet-600 text-white" : "bg-white border border-ink-200 text-ink-600 hover:bg-ink-50")}>
             {l}
           </button>
         ))}

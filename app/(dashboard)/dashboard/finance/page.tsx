@@ -49,7 +49,7 @@ export default function FinancePage() {
       <div className="flex gap-2">
         {[["overview", "Overview"], ["products", "Product Health"], ["learn", "Learn the Terms"]].map(([id, label]) => (
           <button key={id} onClick={() => setTab(id as typeof tab)}
-            className={cn("px-3.5 py-1.5 rounded-full text-sm font-medium", tab === id ? "bg-brand-600 text-white" : "bg-white border border-ink-200 text-ink-600 hover:bg-ink-50")}>
+            className={cn("px-3.5 py-1.5 rounded-full text-sm font-medium", tab === id ? "bg-violet-600 text-white" : "bg-white border border-ink-200 text-ink-600 hover:bg-ink-50")}>
             {label}
           </button>
         ))}
@@ -172,7 +172,7 @@ export default function FinancePage() {
 
       {tab === "learn" && (
         <Card>
-          <CardHeader><CardTitle className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-brand-600" />Learn the terms like a pro</CardTitle>
+          <CardHeader><CardTitle className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-violet-600" />Learn the terms like a pro</CardTitle>
             <CardDescription>These are the exact words real dropshippers use. Read one a day.</CardDescription>
           </CardHeader>
           <CardContent>

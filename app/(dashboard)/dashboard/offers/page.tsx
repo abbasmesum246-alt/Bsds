@@ -74,7 +74,7 @@ export default function OffersPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-400" />
             <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search offers, brands, categories…" className="pl-9" />
           </div>
-          <select value={sort} onChange={(e) => setSort(e.target.value)} className="rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm font-medium focus:border-brand-400 focus:ring-4 focus:ring-brand-100 outline-none cursor-pointer">
+          <select value={sort} onChange={(e) => setSort(e.target.value)} className="rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm font-medium focus:border-brand-400 focus:ring-4 focus:ring-violet-100 outline-none cursor-pointer">
             <option value="trending">🔥 Trending now</option>
             <option value="commission">💰 Highest commission</option>
             <option value="epc">💵 Best EPC</option>
@@ -88,9 +88,9 @@ export default function OffersPage() {
         </div>
         {(facets.categories.length > 0 || facets.tags.length > 0) && (
           <div className="mt-3 flex flex-wrap gap-1.5">
-            <button onClick={() => setCategory("")} className={cn("text-xs px-2.5 py-1 rounded-full font-medium", !category ? "bg-brand-600 text-white" : "bg-ink-100 text-ink-600 hover:bg-ink-200")}>All</button>
+            <button onClick={() => setCategory("")} className={cn("text-xs px-2.5 py-1 rounded-full font-medium", !category ? "bg-violet-600 text-white" : "bg-ink-100 text-ink-600 hover:bg-ink-200")}>All</button>
             {facets.categories.slice(0, 8).map((c) => (
-              <button key={c} onClick={() => setCategory(category === c ? "" : c)} className={cn("text-xs px-2.5 py-1 rounded-full font-medium truncate max-w-[160px]", category === c ? "bg-brand-600 text-white" : "bg-ink-100 text-ink-600 hover:bg-ink-200")}>{c}</button>
+              <button key={c} onClick={() => setCategory(category === c ? "" : c)} className={cn("text-xs px-2.5 py-1 rounded-full font-medium truncate max-w-[160px]", category === c ? "bg-violet-600 text-white" : "bg-ink-100 text-ink-600 hover:bg-ink-200")}>{c}</button>
             ))}
           </div>
         )}
@@ -168,7 +168,7 @@ function OfferDetail({ o, onClose, isGuest }: { o: Offer; onClose: () => void; i
           <div className="flex items-start gap-4">
             <div className="h-16 w-16 rounded-2xl bg-[linear-gradient(135deg,rgba(37,71,247,0.1),rgba(124,58,237,0.1))] flex items-center justify-center text-4xl shrink-0">{o.image}</div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold uppercase text-brand-600 tracking-wider">{o.networkName}</p>
+              <p className="text-xs font-bold uppercase text-violet-600 tracking-wider">{o.networkName}</p>
               <h2 className="text-lg font-extrabold leading-tight">{o.title}</h2>
               <div className="flex items-center gap-2 mt-1">
                 {o.recurring && <Badge tone="green"><Repeat className="h-3 w-3" />Recurring</Badge>}
@@ -188,7 +188,7 @@ function OfferDetail({ o, onClose, isGuest }: { o: Offer; onClose: () => void; i
           </div>
 
           <div className="mt-5 rounded-xl bg-brand-50 border border-brand-100 p-4 flex gap-2.5">
-            <Sparkles className="h-4 w-4 text-brand-600 shrink-0 mt-0.5" />
+            <Sparkles className="h-4 w-4 text-violet-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-bold text-brand-900">Strategy tip</p>
               <p className="text-xs text-brand-800 mt-0.5">{o.strategyTip}</p>

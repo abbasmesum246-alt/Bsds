@@ -96,7 +96,7 @@ export default function StoresPage() {
                     </div>
                     <StatusBadge status={s.status} />
                   </div>
-                  {s.url && <a href={`https://${s.url}`} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-ink-500 hover:text-brand-600 truncate max-w-full">{s.url}<ExternalLink className="h-3 w-3 shrink-0" /></a>}
+                  {s.url && <a href={`https://${s.url}`} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-ink-500 hover:text-violet-600 truncate max-w-full">{s.url}<ExternalLink className="h-3 w-3 shrink-0" /></a>}
                   <div className="mt-5 grid grid-cols-3 gap-2 text-center">
                     <div className="rounded-lg bg-ink-50 py-2.5 px-1"><p className="text-sm font-bold text-ink-900">{formatNumber(s.productsCount)}</p><p className="text-[11px] text-ink-500 mt-0.5">Products</p></div>
                     <div className="rounded-lg bg-ink-50 py-2.5 px-1"><p className="text-sm font-bold text-ink-900">{formatNumber(s.ordersCount)}</p><p className="text-[11px] text-ink-500 mt-0.5">Orders</p></div>

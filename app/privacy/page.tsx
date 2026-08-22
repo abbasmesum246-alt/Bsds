@@ -7,10 +7,10 @@ export default function PrivacyPage() {
       <header className="border-b border-ink-100">
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-brand-600 to-violet-600 flex items-center justify-center text-white font-bold">B</div>
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center text-white font-bold">B</div>
             <span className="font-bold">BSDS</span>
           </Link>
-          <Link href="/" className="text-sm text-brand-600 hover:underline">← Back home</Link>
+          <Link href="/" className="text-sm text-violet-600 hover:underline">← Back home</Link>
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-6 py-12">
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold mt-6">5. Your rights</h2>
         <p className="mt-2 text-ink-600">You can access, correct, export or delete your data from Settings, or by emailing privacy@bsd.app.</p>
         <h2 className="text-xl font-semibold mt-6">6. Contact</h2>
-        <p className="mt-2 text-ink-600">Questions? Email <a href="mailto:privacy@bsd.app" className="text-brand-600">privacy@bsd.app</a>.</p>
+        <p className="mt-2 text-ink-600">Questions? Email <a href="mailto:privacy@bsd.app" className="text-violet-600">privacy@bsd.app</a>.</p>
       </main>
     </div>
   );

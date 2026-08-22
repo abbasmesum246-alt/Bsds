@@ -8,13 +8,13 @@ type Size = "sm" | "md" | "lg" | "icon";
 const variants: Record<Variant, string> = {
   premium: "btn-premium !px-4 !py-2",
   primary:
-    "bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 shadow-[0_8px_20px_-10px_rgba(79,70,229,.7)] hover:shadow-[0_12px_26px_-10px_rgba(79,70,229,.8)] hover:-translate-y-0.5",
+    "bg-gradient-to-br from-violet-600 to-indigo-600 text-white hover:from-violet-500 hover:to-indigo-500 shadow-[0_10px_24px_-10px_rgba(124,58,237,.75)] hover:shadow-[0_14px_30px_-10px_rgba(124,58,237,.85)] hover:-translate-y-0.5",
   secondary:
-    "bg-white/80 backdrop-blur text-ink-700 border border-ink-200 hover:bg-white hover:border-ink-300 hover:shadow-soft",
-  ghost: "text-ink-600 hover:bg-ink-100/80 hover:text-ink-900",
+    "bg-white/80 backdrop-blur text-slate-700 border border-slate-200/80 hover:bg-white hover:border-violet-200 hover:shadow-soft",
+  ghost: "text-slate-600 hover:bg-slate-100/80 hover:text-slate-900",
   danger:
-    "bg-red-600 text-white hover:bg-red-700 shadow-[0_8px_20px_-10px_rgba(220,38,38,.7)] hover:-translate-y-0.5",
-  subtle: "bg-brand-50 text-brand-700 hover:bg-brand-100 ring-1 ring-inset ring-brand-100",
+    "bg-red-600 text-white hover:bg-red-700 shadow-[0_10px_24px_-10px_rgba(220,38,38,.7)] hover:-translate-y-0.5",
+  subtle: "bg-violet-50 text-violet-700 hover:bg-violet-100 ring-1 ring-inset ring-violet-100",
 };
 const sizes: Record<Size, string> = {
   sm: "px-3 py-1.5 text-xs rounded-lg",
@@ -35,7 +35,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 select-none",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-1",
         "disabled:opacity-50 disabled:pointer-events-none",
         variants[variant], sizes[size], className
       )}

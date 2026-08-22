@@ -102,7 +102,7 @@ export default function LearnPage() {
 
       {/* Foundation cards */}
       <div>
-        <h3 className="font-bold text-lg mb-3 flex items-center gap-2"><BookOpen className="h-5 w-5 text-brand-600" />Understand the basics</h3>
+        <h3 className="font-bold text-lg mb-3 flex items-center gap-2"><BookOpen className="h-5 w-5 text-violet-600" />Understand the basics</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {FOUNDATION.map((f, i) => (
             <Card key={i} className="hover:shadow-soft transition">
@@ -168,7 +168,7 @@ export default function LearnPage() {
                 </div>
 
                 <div>
-                  <p className="text-sm font-bold mb-2 flex items-center gap-1.5"><Target className="h-4 w-4 text-brand-600" />Roadmap</p>
+                  <p className="text-sm font-bold mb-2 flex items-center gap-1.5"><Target className="h-4 w-4 text-violet-600" />Roadmap</p>
                   <ol className="space-y-2">{(active.roadmap || []).map((r, i) => (
                     <li key={i} className="flex gap-3 text-xs">
                       <span className="h-5 w-5 shrink-0 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold flex items-center justify-center">{i + 1}</span>
@@ -220,7 +220,7 @@ export default function LearnPage() {
 
       {/* Glossary */}
       <Card>
-        <CardHeader><CardTitle className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-brand-600" />Glossary</CardTitle>
+        <CardHeader><CardTitle className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-violet-600" />Glossary</CardTitle>
           <CardDescription>Every term you'll see in affiliate dashboards, explained in plain words.</CardDescription></CardHeader>
         <CardContent>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -253,7 +253,7 @@ export default function LearnPage() {
             <p><strong>3. Recommend what you use.</strong> Honesty converts better than hype.</p>
             <p><strong>4. Track everything.</strong> What gets measured, gets improved.</p>
             <p><strong>5. Be patient.</strong> Most affiliates earn $0 for 6 months then it compounds.</p>
-            <Link href="/dashboard/offers" className="inline-flex items-center gap-1 text-brand-600 font-semibold text-sm mt-2 hover:underline">Browse real offers now <ChevronRight className="h-4 w-4" /></Link>
+            <Link href="/dashboard/offers" className="inline-flex items-center gap-1 text-violet-600 font-semibold text-sm mt-2 hover:underline">Browse real offers now <ChevronRight className="h-4 w-4" /></Link>
           </CardContent>
         </Card>
       </div>

@@ -96,7 +96,7 @@ export default function BestSuppliersPage() {
           </div>
           <div className="flex gap-2">
             <select value={sort} onChange={(e) => setSort(e.target.value)}
-              className="rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm font-medium focus:border-brand-400 focus:ring-4 focus:ring-brand-100 outline-none cursor-pointer">
+              className="rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm font-medium focus:border-brand-400 focus:ring-4 focus:ring-violet-100 outline-none cursor-pointer">
               <option value="bestmatch">🏆 Best match</option>
               <option value="rating">⭐ Highest rated</option>
               <option value="shipping">🚚 Fastest shipping</option>
@@ -193,7 +193,7 @@ function SupplierCard({ s, rank }: { s: Supplier; rank: number }) {
                   {s.name}
                 </h3>
                 <a href={s.url} target="_blank" rel="noreferrer"
-                  className="text-xs text-brand-600 hover:underline inline-flex items-center gap-1 mt-0.5 truncate max-w-full">
+                  className="text-xs text-violet-600 hover:underline inline-flex items-center gap-1 mt-0.5 truncate max-w-full">
                   {s.url.replace(/^https?:\/\//, "")}<ExternalLink className="h-3 w-3 shrink-0" />
                 </a>
               </div>
@@ -228,7 +228,7 @@ function SupplierCard({ s, rank }: { s: Supplier; rank: number }) {
         </p>
 
         <button onClick={() => setExpanded((v) => !v)}
-          className="mt-3 w-full text-xs font-semibold text-brand-600 hover:text-brand-700">
+          className="mt-3 w-full text-xs font-semibold text-violet-600 hover:text-brand-700">
           {expanded ? "Hide details ▲" : "View pros, cons & pricing ▼"}
         </button>
 
@@ -292,7 +292,7 @@ function LiveSearchHint({ q }: { q: string }) {
     <Card>
       <CardContent className="p-5">
         <h3 className="font-bold flex items-center gap-2 mb-3">
-          <Globe className="h-4 w-4 text-brand-600" />
+          <Globe className="h-4 w-4 text-violet-600" />
           Live web results for &ldquo;{q}&rdquo;
         </h3>
         {results.length === 0 ? (

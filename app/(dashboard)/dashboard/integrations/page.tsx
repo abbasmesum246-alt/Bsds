@@ -254,7 +254,7 @@ function IntegrationCard({
             <div key={f.key}>
               <div className="flex items-center justify-between">
                 <Label>{f.label}</Label>
-                {f.href && <a href={f.href} target="_blank" rel="noreferrer" className="text-[11px] text-brand-600 hover:underline inline-flex items-center gap-0.5">{f.hrefLabel}<ExternalLink className="h-3 w-3" /></a>}
+                {f.href && <a href={f.href} target="_blank" rel="noreferrer" className="text-[11px] text-violet-600 hover:underline inline-flex items-center gap-0.5">{f.hrefLabel}<ExternalLink className="h-3 w-3" /></a>}
               </div>
               <div className="relative mt-1">
                 <Input type={f.password && !show[f.key] ? "password" : "text"} value={form[f.key] || ""}

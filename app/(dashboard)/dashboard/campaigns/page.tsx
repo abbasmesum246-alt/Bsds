@@ -215,7 +215,7 @@ export default function CampaignsPage() {
       </Modal>
 
       <div className="text-center">
-        <Link href="/dashboard/offers" className="text-sm text-brand-600 hover:underline">← Browse offers to promote</Link>
+        <Link href="/dashboard/offers" className="text-sm text-violet-600 hover:underline">← Browse offers to promote</Link>
       </div>
     </div>
   );

@@ -69,7 +69,7 @@ export function ImportModal({ open, onClose, onImported, stores, suppliers }: {
         </div>
         {url && (
           <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-3 flex items-start gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-brand-600 mt-0.5 shrink-0" />
+            <CheckCircle2 className="h-4 w-4 text-violet-600 mt-0.5 shrink-0" />
             <div className="text-xs text-brand-800">
               <p className="font-semibold">Ready to import</p>
               <p className="mt-0.5 text-brand-700/80">We'll apply your default pricing rules, enable price &amp; stock monitoring, and publish to <strong>{stores.find((s) => s.id === storeId)?.name}</strong>.</p>

@@ -55,7 +55,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, confir
       <>
         <button className="inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm bg-white border border-ink-200 hover:bg-ink-50" onClick={onClose} disabled={loading}>Cancel</button>
         <button
-          className={cn("inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm text-white", danger ? "bg-red-600 hover:bg-red-700" : "bg-brand-600 hover:bg-brand-700")}
+          className={cn("inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm text-white", danger ? "bg-red-600 hover:bg-red-700" : "bg-violet-600 hover:bg-violet-700")}
           onClick={onConfirm} disabled={loading}
         >
           {loading ? "Working…" : confirmLabel}

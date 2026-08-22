@@ -95,7 +95,7 @@ export function PriceCalculator() {
         {/* Inputs */}
         <Card className="lg:col-span-3">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2"><Calculator className="h-5 w-5 text-brand-600" />Your costs</CardTitle>
+            <CardTitle className="flex items-center gap-2"><Calculator className="h-5 w-5 text-violet-600" />Your costs</CardTitle>
             <CardDescription>Enter what you pay the supplier. We'll calculate the right price to charge.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -146,7 +146,7 @@ export function PriceCalculator() {
                 <p className="text-xs text-ink-500">Higher conversion, you cover shipping cost</p>
               </div>
               <button onClick={() => { setFreeShipping(!freeShipping); setCustomSell(""); }}
-                className={cn("relative h-6 w-11 rounded-full transition", freeShipping ? "bg-brand-600" : "bg-ink-300")}>
+                className={cn("relative h-6 w-11 rounded-full transition", freeShipping ? "bg-violet-600" : "bg-ink-300")}>
                 <span className={cn("absolute top-0.5 h-5 w-5 rounded-full bg-white transition", freeShipping ? "left-[22px]" : "left-0.5")} />
               </button>
             </div>

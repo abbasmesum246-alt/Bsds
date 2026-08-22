@@ -75,7 +75,7 @@ export function OrderDetailDrawer({ order, onClose, onStatusChange, onFulfill, s
               {order.trackingNumber ? (
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-ink-500 flex items-center gap-1.5"><Truck className="h-3.5 w-3.5" />Tracking</span>
-                  <button onClick={copyTracking} className="text-sm font-mono text-brand-600 hover:underline inline-flex items-center gap-1">{order.trackingNumber}{copied ? <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}</button>
+                  <button onClick={copyTracking} className="text-sm font-mono text-violet-600 hover:underline inline-flex items-center gap-1">{order.trackingNumber}{copied ? <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}</button>
                 </div>
               ) : <p className="text-xs text-ink-400">Tracking appears once the order ships.</p>}
             </div>

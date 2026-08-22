@@ -59,7 +59,7 @@ export default function AffiliateHub() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <button
             onClick={() => setMode("guest")}
-            className={`p-5 text-left transition-all ${isGuest ? "bg-[linear-gradient(135deg,rgba(37,71,247,0.08),rgba(124,58,237,0.08))] ring-2 ring-brand-400" : "hover:bg-ink-50"}`}
+            className={`p-5 text-left transition-all ${isGuest ? "bg-[linear-gradient(135deg,rgba(37,71,247,0.08),rgba(124,58,237,0.08))] ring-2 ring-violet-400" : "hover:bg-ink-50"}`}
           >
             <div className="flex items-center gap-3">
               <div className="h-11 w-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center"><Play className="h-5 w-5" /></div>
@@ -74,7 +74,7 @@ export default function AffiliateHub() {
           </button>
           <button
             onClick={() => setMode("account")}
-            className={`p-5 text-left transition-all ${!isGuest ? "bg-[linear-gradient(135deg,rgba(37,71,247,0.08),rgba(124,58,237,0.08))] ring-2 ring-brand-400" : "hover:bg-ink-50"}`}
+            className={`p-5 text-left transition-all ${!isGuest ? "bg-[linear-gradient(135deg,rgba(37,71,247,0.08),rgba(124,58,237,0.08))] ring-2 ring-violet-400" : "hover:bg-ink-50"}`}
           >
             <div className="flex items-center gap-3">
               <div className="h-11 w-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><Shield className="h-5 w-5" /></div>
@@ -118,7 +118,7 @@ export default function AffiliateHub() {
       {/* Affiliate types */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Megaphone className="h-5 w-5 text-brand-600" />Which type of affiliate are you?</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Megaphone className="h-5 w-5 text-violet-600" />Which type of affiliate are you?</CardTitle>
           <CardDescription>Every feature is grouped by how you promote. Tap a type to see tailored advice.</CardDescription>
         </CardHeader>
         <CardContent>
